@@ -1,0 +1,51 @@
+html,
+.vision,
+#root {
+  height: 100%;
+}
+
+.vision {
+  background-color: #35383e;
+  color: white;
+  /* font-family: 'Montserrat Alternates', sans-serif; */
+  /* font-family: 'Asap', sans-serif; */
+  /* font-family: 'Urbanist', sans-serif; */
+  font-family: 'Jost', sans-serif;
+  font-size: 18px;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  height: 100%;
+}
+
+.drawerItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+}
+
+.loginForm {
+  padding: 0 25px;
+}
+
+.fields div {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.formGroup div {
+  margin-top: 5px;
+}
+
+.invalidInput,
+.invalidInput:focus {
+  border-color: red;
+}
+
+.validInput,
+.validInput:focus {
+  border-color: green;
+}
