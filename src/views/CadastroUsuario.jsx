@@ -23,11 +23,20 @@ export default class CadastroUsuario extends Component {
     };
   }
 
-  componentDidMount = () => {
+  populaPaises = () => {
+    fetch('http://localhost:9000/address/getPaises')
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({ listaPaises: data });
+      });
+  };
+
+  componentDidMount = async () => {
     Inputmask({ mask: '999.999.999-99' }).mask(document.getElementById('cpf'));
     Inputmask({ mask: '(99) 9 9999-9999' }).mask(
       document.getElementById('telefone'),
     );
+    this.populaPaises();
   };
 
   validador = (senha) => {
@@ -64,6 +73,8 @@ export default class CadastroUsuario extends Component {
   };
 
   render() {
+    const { listaPaises } = this.state;
+
     return (
       <div
         className="formGroup"
@@ -169,6 +180,8 @@ export default class CadastroUsuario extends Component {
                   { label: 'Outro', value: 'outro' },
                   { label: 'Prefiro não informar', value: 'naoInformado' },
                 ]}
+                idCol="value"
+                valueCol="label"
               />
             </div>
             <div className="col-xs-12 col-md-6">
@@ -182,12 +195,16 @@ export default class CadastroUsuario extends Component {
               />
             </div>
             <div className="col-xs-12 col-md-6">
-              <CustomField
+              <SelectBox
                 label="País"
                 name="country"
                 id="country"
                 onChange={(e) => this.setState({ country: e })}
                 value={this.state.country}
+                list={listaPaises}
+                idCol="id"
+                valueCol="fips"
+                complementCol="nome"
               />
             </div>
             <div className="col-xs-12 col-md-6">

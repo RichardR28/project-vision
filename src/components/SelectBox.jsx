@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 
 export default class SelectBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-
   handleChange = (value) => {
     this.setState({ value: value });
-    if (this.state.onChange) {
-      this.state.onChange(value);
+    if (this.props.onChange) {
+      this.props.onChange(value);
     }
   };
 
   render() {
+    const {
+      idCol,
+      valueCol,
+      complementCol,
+      list,
+      label,
+      id,
+      name,
+      title,
+      value,
+    } = this.props;
     return (
       <div
         style={{
@@ -21,26 +27,26 @@ export default class SelectBox extends Component {
           flexDirection: 'column',
         }}
       >
-        <div style={{ textAlign: 'start' }}>
-          {this.state.label || 'Custom Field'}:
-        </div>
+        <div style={{ textAlign: 'start' }}>{label || 'Custom Field'}:</div>
         <select
-          id={this.state.id}
-          name={this.state.name}
+          id={id}
+          name={name}
           onChange={(e) => this.handleChange(e.target.value)}
-          title={this.state.title || null}
-          value={this.state.value}
+          title={title || null}
+          value={value}
           style={{
             height: 33,
             borderRadius: 5,
             border: 'solid 1px #00000078',
           }}
         >
-          {this.state.list
-            ? this.state.list.map((item) => {
+          {list && list.length > 0
+            ? list.map((item, index) => {
                 return (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
+                  <option key={index} value={item[idCol]}>
+                    {complementCol
+                      ? `${item[valueCol]} - ${item[complementCol]}`
+                      : item[valueCol]}
                   </option>
                 );
               })
