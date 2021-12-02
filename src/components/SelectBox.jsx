@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 export default class SelectBox extends Component {
-  handleChange = (value) => {
-    this.setState({ value: value });
+  handleChange = (e) => {
+    this.setState({ value: e.target.value });
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(e.target.value);
     }
   };
 
@@ -19,6 +19,7 @@ export default class SelectBox extends Component {
       name,
       title,
       value,
+      disabled,
     } = this.props;
     return (
       <div
@@ -31,7 +32,7 @@ export default class SelectBox extends Component {
         <select
           id={id}
           name={name}
-          onChange={(e) => this.handleChange(e.target.value)}
+          onChange={(e) => this.handleChange(e)}
           title={title || null}
           value={value}
           style={{
@@ -39,11 +40,15 @@ export default class SelectBox extends Component {
             borderRadius: 5,
             border: 'solid 1px #00000078',
           }}
+          disabled={disabled}
         >
+          <option value="" key={0}>
+            Selecione
+          </option>
           {list && list.length > 0
-            ? list.map((item, index) => {
+            ? list.map((item) => {
                 return (
-                  <option key={index} value={item[idCol]}>
+                  <option key={item[idCol]} value={item[idCol]}>
                     {complementCol
                       ? `${item[valueCol]} - ${item[complementCol]}`
                       : item[valueCol]}

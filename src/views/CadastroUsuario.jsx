@@ -31,11 +31,48 @@ export default class CadastroUsuario extends Component {
       });
   };
 
+  populaEstados = (id) => {
+    fetch('http://localhost:9000/address/getEstados', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({ listaEstados: data });
+      });
+  };
+
+  populaCidades = (id) => {
+    fetch('http://localhost:9000/address/getCidades', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({ listaCidades: data });
+      });
+  };
+
+  populaGeneros = () => {
+    fetch('http://localhost:9000/users/getGeneros')
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({ listaGeneros: data });
+      });
+  };
+
   componentDidMount = async () => {
     Inputmask({ mask: '999.999.999-99' }).mask(document.getElementById('cpf'));
     Inputmask({ mask: '(99) 9 9999-9999' }).mask(
       document.getElementById('telefone'),
     );
+    this.populaGeneros();
     this.populaPaises();
   };
 
@@ -72,8 +109,19 @@ export default class CadastroUsuario extends Component {
     }
   };
 
+  selectPais = (e) => {
+    this.populaEstados(e);
+    this.setState({ country: e });
+  };
+
+  selectEstado = (e) => {
+    this.populaCidades(e);
+    this.setState({ estado: e });
+  };
+
   render() {
-    const { listaPaises } = this.state;
+    const { listaPaises, listaEstados, listaCidades, listaGeneros } =
+      this.state;
 
     return (
       <div
@@ -173,14 +221,8 @@ export default class CadastroUsuario extends Component {
                   this.setState({ genero: e });
                 }}
                 value={this.state.genero}
-                list={[
-                  { label: 'Selecione ...', value: '' },
-                  { label: 'Masculino', value: 'masculino' },
-                  { label: 'Feminino', value: 'feminino' },
-                  { label: 'Outro', value: 'outro' },
-                  { label: 'Prefiro não informar', value: 'naoInformado' },
-                ]}
-                idCol="value"
+                list={listaGeneros}
+                idCol="id"
                 valueCol="label"
               />
             </div>
@@ -199,7 +241,7 @@ export default class CadastroUsuario extends Component {
                 label="País"
                 name="country"
                 id="country"
-                onChange={(e) => this.setState({ country: e })}
+                onChange={(e) => this.selectPais(e)}
                 value={this.state.country}
                 list={listaPaises}
                 idCol="id"
@@ -208,21 +250,30 @@ export default class CadastroUsuario extends Component {
               />
             </div>
             <div className="col-xs-12 col-md-6">
-              <CustomField
+              <SelectBox
                 label="Estado (UF)"
                 id="estado"
                 name="estado"
-                onChange={(e) => this.setState({ estado: e })}
+                disabled={!this.state.country}
+                onChange={(e) => this.selectEstado(e)}
                 value={this.state.estado}
+                list={listaEstados}
+                idCol="id"
+                valueCol="uf"
+                complementCol="nome"
               />
             </div>
             <div className="col-xs-12 col-md-6">
-              <CustomField
+              <SelectBox
                 label="Cidade"
-                name="cidade"
                 id="cidade"
+                name="cidade"
+                disabled={!this.state.estado}
                 onChange={(e) => this.setState({ cidade: e })}
                 value={this.state.cidade}
+                list={listaCidades}
+                idCol="id"
+                valueCol="nome"
               />
             </div>
             <div className="col-xs-12 col-md-6">
