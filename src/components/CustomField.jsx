@@ -13,6 +13,12 @@ export default class CustomField extends Component {
     }
   };
 
+  onLeaveField = (value) => {
+    if (this.state.onBlur) {
+      this.state.onBlur(value);
+    }
+  };
+
   render() {
     return (
       <div
@@ -29,6 +35,7 @@ export default class CustomField extends Component {
           name={this.state.name}
           placeholder={this.state.placeholder || ''}
           onChange={(e) => this.handleChange(e.target.value)}
+          onBlur={(e) => this.onLeaveField(e.target.value)}
           value={this.state.value}
           type={this.state.type || 'text'}
           title={this.state.title || null}

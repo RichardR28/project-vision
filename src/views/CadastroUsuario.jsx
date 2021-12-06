@@ -24,7 +24,7 @@ export default class CadastroUsuario extends Component {
   }
 
   populaPaises = () => {
-    fetch('http://localhost:9000/address/getPaises')
+    fetch('http://192.168.100.10:9000/address/getPaises')
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({ listaPaises: data });
@@ -32,7 +32,7 @@ export default class CadastroUsuario extends Component {
   };
 
   populaEstados = (id) => {
-    fetch('http://localhost:9000/address/getEstados', {
+    fetch('http://192.168.100.10:9000/address/getEstados', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -46,7 +46,7 @@ export default class CadastroUsuario extends Component {
   };
 
   populaCidades = (id) => {
-    fetch('http://localhost:9000/address/getCidades', {
+    fetch('http://192.168.100.10:9000/address/getCidades', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -60,7 +60,7 @@ export default class CadastroUsuario extends Component {
   };
 
   populaGeneros = () => {
-    fetch('http://localhost:9000/users/getGeneros')
+    fetch('http://192.168.100.10:9000/users/getGeneros')
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({ listaGeneros: data });
@@ -103,9 +103,11 @@ export default class CadastroUsuario extends Component {
     if (this.validador(senha.value) && senha.value === confirmarSenha.value) {
       senha.style.borderColor = 'green';
       confirmarSenha.style.borderColor = 'green';
+      this.setState({ senhaValida: true });
     } else {
       senha.style.borderColor = 'red';
       confirmarSenha.style.borderColor = 'red';
+      this.setState({ senhaValida: false });
     }
   };
 
@@ -117,6 +119,108 @@ export default class CadastroUsuario extends Component {
   selectEstado = (e) => {
     this.populaCidades(e);
     this.setState({ estado: e });
+  };
+
+  validaCampos = () => {
+    const {
+      userCPF,
+      nome,
+      userValido,
+      email,
+      senhaValida,
+      genero,
+      dataNascimento,
+      country,
+      estado,
+      cidade,
+    } = this.state;
+
+    if (
+      userCPF &&
+      nome &&
+      email &&
+      senhaValida &&
+      userValido &&
+      genero &&
+      dataNascimento &&
+      country &&
+      estado &&
+      cidade
+    ) {
+      return false;
+    } else if (!userValido) {
+      return 'Username inválido ou em uso.';
+    } else if (!senhaValida) {
+      return 'Senha invalida, necessário que a senha tenha no mínimo 8 caracteres, possuindo ao menos 1 número, 1 caracter especial, 1 letra maiúscula e 1 letra minúscula.';
+    } else {
+      return 'Necessário que os campos: Nome Completo, Usuário, E-mail, CPF, Senha, Gênero, Data Nascimento, País, Estado e Cidade estejam corretamente preenchidos.';
+    }
+  };
+
+  createUser = () => {
+    const msg = this.validaCampos();
+    if (!msg) {
+      const unmaskCPF = Inputmask.unmask(this.state.userCPF, {
+        mask: '999-99999-99',
+      });
+      const unmaskTelefone = this.state.telefone
+        ? Inputmask.unmask(this.state.telefone, {
+            mask: '(99) 9 9999-9999',
+          })
+        : null;
+      fetch('http://192.168.100.10:9000/users/createUser', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userCPF: unmaskCPF,
+          nome: this.state.nome,
+          user: this.state.user,
+          email: this.state.email,
+          senha: this.state.senha,
+          genero: this.state.genero,
+          dataNascimento: this.state.dataNascimento,
+          country: this.state.country,
+          estado: this.state.estado,
+          cidade: this.state.cidade,
+          telefone: unmaskTelefone,
+        }),
+      })
+        .then((req) => req.json())
+        .then((data) => {
+          if (data?.status === 200) {
+            alert('Usuário criado com sucesso.');
+            window.location = '/login';
+          } else {
+            alert(
+              'Ocorreu um erro durante a criação de usuário. Por favor tente novamente.',
+            );
+          }
+        });
+    } else {
+      alert(msg);
+    }
+  };
+
+  validaUsername = (username) => {
+    const userField = document.getElementById('user');
+    fetch('http://192.168.100.10:9000/users/validaUsername', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data?.[0].count === 0) {
+          userField.style.borderColor = 'green';
+          this.setState({ userValido: true });
+        } else {
+          userField.style.borderColor = 'red';
+          alert('Username já em uso.');
+          this.setState({ userValido: false });
+        }
+      });
   };
 
   render() {
@@ -161,6 +265,7 @@ export default class CadastroUsuario extends Component {
                 name="user"
                 id="user"
                 onChange={(e) => this.setState({ user: e })}
+                onBlur={(e) => this.validaUsername(e)}
                 value={this.state.user}
               />
             </div>
@@ -314,6 +419,7 @@ export default class CadastroUsuario extends Component {
                 color: 'white',
                 width: '40%',
               }}
+              onClick={() => this.createUser()}
             >
               Salvar
             </Button>

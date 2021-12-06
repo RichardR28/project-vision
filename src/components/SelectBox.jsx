@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 export default class SelectBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: props.value };
+  }
   handleChange = (e) => {
     this.setState({ value: e.target.value });
     if (this.props.onChange) {
@@ -18,7 +22,6 @@ export default class SelectBox extends Component {
       id,
       name,
       title,
-      value,
       disabled,
     } = this.props;
     return (
@@ -34,7 +37,7 @@ export default class SelectBox extends Component {
           name={name}
           onChange={(e) => this.handleChange(e)}
           title={title || null}
-          value={value}
+          value={this.state.value}
           style={{
             height: 33,
             borderRadius: 5,
