@@ -1,105 +1,111 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Paper, TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { login } from '../actions/UserActions';
 
-export default class Login extends Component {
-  render() {
-    return (
-      <div
+export default function Login() {
+  const userStore = useSelector((state) => state.user);
+  console.log(userStore);
+  const dispatch = useDispatch();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  function logar() {
+    login(username, password, dispatch);
+  }
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        maxHeight: 500,
+        height: '100%',
+      }}
+    >
+      <Paper
+        elevation={5}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          maxHeight: 500,
-          height: '100%',
+          background: '#fafafa',
+          minWidth: 250,
+          maxWidth: 300,
+          width: '90%',
+          zoom: 1.25,
+          padding: '15px 0',
         }}
       >
-        <Paper
-          elevation={5}
+        <div
           style={{
-            background: '#fafafa',
-            minWidth: 250,
-            maxWidth: 300,
-            width: '90%',
-            zoom: 1.25,
-            padding: '15px 0',
+            display: 'flex',
+            flexDirection: 'column',
+            textAlign: 'center',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              textAlign: 'center',
-            }}
-          >
-            <div>LOGO</div>
-            <div className="loginForm">
-              <div className="fields">
-                <TextField
-                  className="inputText"
-                  label="Usuário"
-                  placeholder="Username ou email"
-                  size="small"
-                  inputProps={{
-                    className: {
-                      background: 'black',
-                    },
-                  }}
-                />
-                <TextField
-                  className="inputText"
-                  label="Senha"
-                  type="password"
-                  placeholder="************"
-                  size="small"
-                  inputProps={{
-                    className: {
-                      background: 'black',
-                    },
-                  }}
-                />
-              </div>
-              <Button
-                variant="contained"
+          <div>LOGO</div>
+          <div className="loginForm">
+            <div className="fields">
+              <TextField
+                className="inputText"
+                label="Usuário"
+                placeholder="Username ou email"
                 size="small"
-                style={{
-                  background: '#47967e',
-                  color: 'white',
-                  width: '100%',
-                  marginTop: 25,
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                inputProps={{
+                  className: {
+                    background: 'black',
+                  },
                 }}
-              >
-                Login
-              </Button>
-              <div
-                style={{
-                  fontSize: 14,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  marginTop: 10,
+              />
+              <TextField
+                className="inputText"
+                label="Senha"
+                type="password"
+                placeholder="************"
+                size="small"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                inputProps={{
+                  className: {
+                    background: 'black',
+                  },
                 }}
-              >
-                Não possui uma conta?
-                <Link
-                  to="/cadastroUsuario"
-                  style={{
-                    textDecoration: 'none',
-                    marginLeft: 5,
-                    color: 'rgb(0 143 128)',
-                  }}
-                >
-                  Criar conta
-                </Link>
-              </div>
+              />
+            </div>
+            <Button
+              variant="contained"
+              size="small"
+              style={{
+                background: '#47967e',
+                color: 'white',
+                width: '100%',
+                marginTop: 25,
+              }}
+              onClick={() => logar()}
+            >
+              Login
+            </Button>
+            <div
+              style={{
+                fontSize: 14,
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: 10,
+              }}
+            >
+              Não possui uma conta?
               <Link
-                to="/"
+                to="/cadastroUsuario"
                 style={{
                   textDecoration: 'none',
-                  fontSize: 14,
+                  marginLeft: 5,
                   color: 'rgb(0 143 128)',
                 }}
               >
-                Esqueceu sua senha?
+                Criar conta
               </Link>
             </div>
             <Link
@@ -107,14 +113,24 @@ export default class Login extends Component {
               style={{
                 textDecoration: 'none',
                 fontSize: 14,
-                color: 'rgb(223 70 41)',
+                color: 'rgb(0 143 128)',
               }}
             >
-              Voltar
+              Esqueceu sua senha?
             </Link>
           </div>
-        </Paper>
-      </div>
-    );
-  }
+          <Link
+            to="/"
+            style={{
+              textDecoration: 'none',
+              fontSize: 14,
+              color: 'rgb(223 70 41)',
+            }}
+          >
+            Voltar
+          </Link>
+        </div>
+      </Paper>
+    </div>
+  );
 }

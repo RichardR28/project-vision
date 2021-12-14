@@ -1,37 +1,36 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Paper, Button } from '@material-ui/core';
 import { CustomField, SelectBox } from '../components';
 import { cpf } from 'cpf-cnpj-validator';
 import Inputmask from 'inputmask';
 
-export default class CadastroUsuario extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userCPF: '',
-      nome: '',
-      user: '',
-      email: '',
-      senha: '',
-      confirmarSenha: '',
-      genero: '',
-      dataNascimento: '',
-      country: '',
-      estado: '',
-      cidade: '',
-      telefone: '',
-    };
-  }
+export default function CadastroUsuario() {
+  const [controlador, setControlador] = useState({
+    userCPF: '',
+    nome: '',
+    user: '',
+    email: '',
+    senha: '',
+    confirmarSenha: '',
+    genero: '',
+    dataNascimento: '',
+    country: '',
+    estado: '',
+    cidade: '',
+    telefone: '',
+  });
 
-  populaPaises = () => {
+  function populaPaises() {
     fetch('http://192.168.100.10:9000/address/getPaises')
       .then((resp) => resp.json())
       .then((data) => {
-        this.setState({ listaPaises: data });
+        setControlador((prev) => {
+          return { ...prev, listaPaises: data };
+        });
       });
-  };
+  }
 
-  populaEstados = (id) => {
+  function populaEstados(id) {
     fetch('http://192.168.100.10:9000/address/getEstados', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -41,11 +40,13 @@ export default class CadastroUsuario extends Component {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        this.setState({ listaEstados: data });
+        setControlador((prev) => {
+          return { ...prev, listaEstados: data };
+        });
       });
-  };
+  }
 
-  populaCidades = (id) => {
+  function populaCidades(id) {
     fetch('http://192.168.100.10:9000/address/getCidades', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -55,28 +56,32 @@ export default class CadastroUsuario extends Component {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        this.setState({ listaCidades: data });
+        setControlador((prev) => {
+          return { ...prev, listaCidades: data };
+        });
       });
-  };
+  }
 
-  populaGeneros = () => {
+  function populaGeneros() {
     fetch('http://192.168.100.10:9000/users/getGeneros')
       .then((resp) => resp.json())
       .then((data) => {
-        this.setState({ listaGeneros: data });
+        setControlador((prev) => {
+          return { ...prev, listaGeneros: data };
+        });
       });
-  };
+  }
 
-  componentDidMount = async () => {
+  useEffect(() => {
     Inputmask({ mask: '999.999.999-99' }).mask(document.getElementById('cpf'));
     Inputmask({ mask: '(99) 9 9999-9999' }).mask(
       document.getElementById('telefone'),
     );
-    this.populaGeneros();
-    this.populaPaises();
-  };
+    populaGeneros();
+    populaPaises();
+  }, []);
 
-  validador = (senha) => {
+  function validador(senha) {
     const regex = /^(?=.*[@!#$%^&*()/\\])[@!#$%^&*()/\\a-zA-Z0-9]{8,20}$/;
     const valid = regex.test(senha);
     if (valid && senha.length >= 8) {
@@ -84,44 +89,54 @@ export default class CadastroUsuario extends Component {
     } else {
       return false;
     }
-  };
+  }
 
-  cpfValidator = (value) => {
+  function cpfValidator(value) {
     const x = cpf.format(value);
     if (cpf.isValid(x)) {
       document.getElementById('cpf').style.borderColor = 'green';
     } else {
       document.getElementById('cpf').style.borderColor = 'red';
     }
-    this.setState({ userCPF: x });
-  };
+    setControlador((prev) => {
+      return { ...prev, userCPF: x };
+    });
+  }
 
-  validaSenha = () => {
+  function validaSenha() {
     const senha = document.getElementById('senha');
     const confirmarSenha = document.getElementById('confirmarSenha');
 
-    if (this.validador(senha.value) && senha.value === confirmarSenha.value) {
+    if (validador(senha.value) && senha.value === confirmarSenha.value) {
       senha.style.borderColor = 'green';
       confirmarSenha.style.borderColor = 'green';
-      this.setState({ senhaValida: true });
+      setControlador((prev) => {
+        return { ...prev, senhaValida: true };
+      });
     } else {
       senha.style.borderColor = 'red';
       confirmarSenha.style.borderColor = 'red';
-      this.setState({ senhaValida: false });
+      setControlador((prev) => {
+        return { ...prev, senhaValida: false };
+      });
     }
-  };
+  }
 
-  selectPais = (e) => {
-    this.populaEstados(e);
-    this.setState({ country: e });
-  };
+  function selectPais(e) {
+    populaEstados(e);
+    setControlador((prev) => {
+      return { ...prev, country: e };
+    });
+  }
 
-  selectEstado = (e) => {
-    this.populaCidades(e);
-    this.setState({ estado: e });
-  };
+  function selectEstado(e) {
+    populaCidades(e);
+    setControlador((prev) => {
+      return { ...prev, estado: e };
+    });
+  }
 
-  validaCampos = () => {
+  function validaCampos() {
     const {
       userCPF,
       nome,
@@ -133,7 +148,7 @@ export default class CadastroUsuario extends Component {
       country,
       estado,
       cidade,
-    } = this.state;
+    } = controlador;
 
     if (
       userCPF &&
@@ -155,16 +170,16 @@ export default class CadastroUsuario extends Component {
     } else {
       return 'Necessário que os campos: Nome Completo, Usuário, E-mail, CPF, Senha, Gênero, Data Nascimento, País, Estado e Cidade estejam corretamente preenchidos.';
     }
-  };
+  }
 
-  createUser = () => {
-    const msg = this.validaCampos();
+  function createUser() {
+    const msg = validaCampos();
     if (!msg) {
-      const unmaskCPF = Inputmask.unmask(this.state.userCPF, {
+      const unmaskCPF = Inputmask.unmask(controlador.userCPF, {
         mask: '999-99999-99',
       });
-      const unmaskTelefone = this.state.telefone
-        ? Inputmask.unmask(this.state.telefone, {
+      const unmaskTelefone = controlador.telefone
+        ? Inputmask.unmask(controlador.telefone, {
             mask: '(99) 9 9999-9999',
           })
         : null;
@@ -173,15 +188,15 @@ export default class CadastroUsuario extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userCPF: unmaskCPF,
-          nome: this.state.nome,
-          user: this.state.user,
-          email: this.state.email,
-          senha: this.state.senha,
-          genero: this.state.genero,
-          dataNascimento: this.state.dataNascimento,
-          country: this.state.country,
-          estado: this.state.estado,
-          cidade: this.state.cidade,
+          nome: controlador.nome,
+          user: controlador.user,
+          email: controlador.email,
+          senha: controlador.senha,
+          genero: controlador.genero,
+          dataNascimento: controlador.dataNascimento,
+          country: controlador.country,
+          estado: controlador.estado,
+          cidade: controlador.cidade,
           telefone: unmaskTelefone,
         }),
       })
@@ -199,9 +214,9 @@ export default class CadastroUsuario extends Component {
     } else {
       alert(msg);
     }
-  };
+  }
 
-  validaUsername = (username) => {
+  function validaUsername(username) {
     const userField = document.getElementById('user');
     fetch('http://192.168.100.10:9000/users/validaUsername', {
       method: 'post',
@@ -214,218 +229,249 @@ export default class CadastroUsuario extends Component {
       .then((data) => {
         if (data?.[0].count === 0) {
           userField.style.borderColor = 'green';
-          this.setState({ userValido: true });
+          setControlador((prev) => {
+            return { ...prev, userValido: true };
+          });
         } else {
           userField.style.borderColor = 'red';
           alert('Username já em uso.');
-          this.setState({ userValido: false });
+          setControlador((prev) => {
+            return { ...prev, userValido: false };
+          });
         }
       });
-  };
+  }
 
-  render() {
-    const { listaPaises, listaEstados, listaCidades, listaGeneros } =
-      this.state;
+  const { listaPaises, listaEstados, listaCidades, listaGeneros } = controlador;
 
-    return (
-      <div
-        className="formGroup"
+  return (
+    <div
+      className="formGroup"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        textAlign: 'center',
+        marginTop: '3%',
+      }}
+    >
+      <Paper
+        elevation={5}
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          textAlign: 'center',
-          marginTop: '3%',
+          minWidth: 300,
+          width: '90%',
+          maxWidth: 700,
+          padding: 20,
+          zoom: 1.2,
+          marginBottom: 10,
         }}
       >
-        <Paper
-          elevation={5}
+        <div style={{ fontSize: 24 }}>Dados Cadastrais</div>
+        <div className="row">
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="Nome Completo"
+              name="nome"
+              id="nome"
+              onChange={(e) =>
+                setControlador((prev) => {
+                  return { ...prev, nome: e };
+                })
+              }
+              value={controlador.nome}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="Usuário"
+              name="user"
+              id="user"
+              onChange={(e) =>
+                setControlador((prev) => {
+                  return { ...prev, user: e };
+                })
+              }
+              onBlur={(e) => validaUsername(e)}
+              value={controlador.user}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="E-mail"
+              id="email"
+              name="email"
+              placeholder="exemplo@email.com.br"
+              type="email"
+              onChange={(e) =>
+                setControlador((prev) => {
+                  return { ...prev, email: e };
+                })
+              }
+              value={controlador.email}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="CPF"
+              id="cpf"
+              name="cpf"
+              value={controlador.userCPF}
+              onChange={(e) => cpfValidator(e)}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="Senha"
+              name="senha"
+              id="senha"
+              type="password"
+              placeholder="Ex: 123@Senha"
+              title="É necessário que a senha tenha no mínimo 8 caracteres, possuindo ao menos 1 número, 1 caracter especial, 1 letra maiúscula e 1 letra minúscula."
+              onChange={(e) => {
+                validaSenha();
+                setControlador((prev) => {
+                  return { ...prev, senha: e };
+                });
+              }}
+              value={controlador.senha}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="Confirmar Senha"
+              id="confirmarSenha"
+              name="confirmarSenha"
+              type="password"
+              onChange={(e) => {
+                validaSenha();
+                setControlador((prev) => {
+                  return { ...prev, confirmarSenha: e };
+                });
+              }}
+              value={controlador.confirmarSenha}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <SelectBox
+              label="Gênero"
+              name="genero"
+              id="genero"
+              onChange={(e) => {
+                setControlador((prev) => {
+                  return { ...prev, genero: e };
+                });
+              }}
+              value={controlador.genero}
+              list={listaGeneros}
+              idCol="id"
+              valueCol="label"
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="Data de Nascimento"
+              id="dataNascimento"
+              name="dataNascimento"
+              type="date"
+              onChange={(e) =>
+                setControlador((prev) => {
+                  return { ...prev, dataNascimento: e };
+                })
+              }
+              value={controlador.dataNascimento}
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <SelectBox
+              label="País"
+              name="country"
+              id="country"
+              onChange={(e) => selectPais(e)}
+              value={controlador.country}
+              list={listaPaises}
+              idCol="id"
+              valueCol="fips"
+              complementCol="nome"
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <SelectBox
+              label="Estado (UF)"
+              id="estado"
+              name="estado"
+              disabled={!controlador.country}
+              onChange={(e) => selectEstado(e)}
+              value={controlador.estado}
+              list={listaEstados}
+              idCol="id"
+              valueCol="uf"
+              complementCol="nome"
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <SelectBox
+              label="Cidade"
+              id="cidade"
+              name="cidade"
+              disabled={!controlador.estado}
+              onChange={(e) =>
+                setControlador((prev) => {
+                  return { ...prev, cidade: e };
+                })
+              }
+              value={controlador.cidade}
+              list={listaCidades}
+              idCol="id"
+              valueCol="nome"
+            />
+          </div>
+          <div className="col-xs-12 col-md-6">
+            <CustomField
+              label="Telefone"
+              id="telefone"
+              name="telefone"
+              type="tel"
+              onChange={(e) =>
+                setControlador((prev) => {
+                  return { ...prev, telefone: e };
+                })
+              }
+              value={controlador.telefone}
+            />
+          </div>
+        </div>
+        <div
           style={{
-            minWidth: 300,
-            width: '90%',
-            maxWidth: 700,
-            padding: 20,
-            zoom: 1.2,
-            marginBottom: 10,
+            display: 'flex',
+            justifyContent: 'space-around',
+            marginTop: 20,
           }}
         >
-          <div style={{ fontSize: 24 }}>Dados Cadastrais</div>
-          <div className="row">
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="Nome Completo"
-                name="nome"
-                id="nome"
-                onChange={(e) => this.setState({ nome: e })}
-                value={this.state.nome}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="Usuário"
-                name="user"
-                id="user"
-                onChange={(e) => this.setState({ user: e })}
-                onBlur={(e) => this.validaUsername(e)}
-                value={this.state.user}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="E-mail"
-                id="email"
-                name="email"
-                placeholder="exemplo@email.com.br"
-                type="email"
-                onChange={(e) => this.setState({ email: e })}
-                value={this.state.email}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="CPF"
-                id="cpf"
-                name="cpf"
-                value={this.state.userCPF}
-                onChange={(e) => this.cpfValidator(e)}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="Senha"
-                name="senha"
-                id="senha"
-                type="password"
-                placeholder="Ex: 123@Senha"
-                title="É necessário que a senha tenha no mínimo 8 caracteres, possuindo ao menos 1 número, 1 caracter especial, 1 letra maiúscula e 1 letra minúscula."
-                onChange={(e) => {
-                  this.validaSenha();
-                  this.setState({ senha: e });
-                }}
-                value={this.state.senha}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="Confirmar Senha"
-                id="confirmarSenha"
-                name="confirmarSenha"
-                type="password"
-                onChange={(e) => {
-                  this.validaSenha();
-                  this.setState({ confirmarSenha: e });
-                }}
-                value={this.state.confirmarSenha}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <SelectBox
-                label="Gênero"
-                name="genero"
-                id="genero"
-                onChange={(e) => {
-                  this.setState({ genero: e });
-                }}
-                value={this.state.genero}
-                list={listaGeneros}
-                idCol="id"
-                valueCol="label"
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="Data de Nascimento"
-                id="dataNascimento"
-                name="dataNascimento"
-                type="date"
-                onChange={(e) => this.setState({ dataNascimento: e })}
-                value={this.state.dataNascimento}
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <SelectBox
-                label="País"
-                name="country"
-                id="country"
-                onChange={(e) => this.selectPais(e)}
-                value={this.state.country}
-                list={listaPaises}
-                idCol="id"
-                valueCol="fips"
-                complementCol="nome"
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <SelectBox
-                label="Estado (UF)"
-                id="estado"
-                name="estado"
-                disabled={!this.state.country}
-                onChange={(e) => this.selectEstado(e)}
-                value={this.state.estado}
-                list={listaEstados}
-                idCol="id"
-                valueCol="uf"
-                complementCol="nome"
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <SelectBox
-                label="Cidade"
-                id="cidade"
-                name="cidade"
-                disabled={!this.state.estado}
-                onChange={(e) => this.setState({ cidade: e })}
-                value={this.state.cidade}
-                list={listaCidades}
-                idCol="id"
-                valueCol="nome"
-              />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <CustomField
-                label="Telefone"
-                id="telefone"
-                name="telefone"
-                type="tel"
-                onChange={(e) => this.setState({ telefone: e })}
-                value={this.state.telefone}
-              />
-            </div>
-          </div>
-          <div
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => (window.location = '/login')}
             style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              marginTop: 20,
+              background: 'rgb(255 0 0)',
+              color: 'white',
+              width: '40%',
             }}
           >
-            <Button
-              variant="contained"
-              size="small"
-              onClick={() => (window.location = '/login')}
-              style={{
-                background: 'rgb(255 0 0)',
-                color: 'white',
-                width: '40%',
-              }}
-            >
-              Voltar
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              style={{
-                background: '#47967e',
-                color: 'white',
-                width: '40%',
-              }}
-              onClick={() => this.createUser()}
-            >
-              Salvar
-            </Button>
-          </div>
-        </Paper>
-      </div>
-    );
-  }
+            Voltar
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              background: '#47967e',
+              color: 'white',
+              width: '40%',
+            }}
+            onClick={() => createUser()}
+          >
+            Salvar
+          </Button>
+        </div>
+      </Paper>
+    </div>
+  );
 }
