@@ -25,6 +25,7 @@ html,
   width: 100%;
   align-items: center;
   cursor: pointer;
+  max-height: 36px;
 }
 
 .loginForm {
@@ -48,4 +49,105 @@ html,
 .validInput,
 .validInput:focus {
   border-color: green;
+}
+
+.listQuizzes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.listQuizzesItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  height: 300px;
+  min-width: 300px;
+  width: 20%;
+  border-radius: 15px !important;
+}
+
+.listJogos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.listJogosItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  height: 300px;
+  min-width: 300px;
+  width: 20%;
+  border-radius: 15px !important;
+}
+
+.cardHeader {
+  width: 100%;
+  color: white;
+  background-color: #35383ed4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.cardContent {
+  height: 100%;
+  width: 100%;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.cardContent img {
+  height: 100%;
+  width: 100%;
+}
+
+.cardActions {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: transparent;
+  background-color: #35383ed4;
+}
+
+.cardActions button {
+  border-radius: 25px;
+  border: none;
+  width: 50%;
+  color: white;
+}
+
+.cardActions button {
+  cursor: pointer;
+}
+
+.cardActions button.play {
+  background-color: #11e3119e;
+}
+
+.cardActions button.info {
+  background-color: #5a5ac7fa;
+}
+
+.saveGameCreate {
+  font-size: 22px;
+  border: none;
+  border-radius: 15px;
+  width: 240px;
+  color: white;
+  background-color: #56a056;
+  margin-top: 5px;
 }

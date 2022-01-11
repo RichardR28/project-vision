@@ -2,8 +2,10 @@ import React from 'react';
 import { Paper, IconButton } from '@material-ui/core';
 import { mdiForum, mdiGamepadSquare } from '@mdi/js';
 import { Icon } from '@mdi/react';
+import { useHistory } from 'react-router-dom';
 
 export default function About() {
+  const history = useHistory();
   return (
     <div
       style={{
@@ -56,7 +58,7 @@ export default function About() {
             width: '100%',
           }}
         >
-          <IconButton onClick={() => (window.location = '/')}>
+          <IconButton onClick={() => history.push('/listaQuizzes')}>
             <div
               style={{
                 display: 'flex',
@@ -69,7 +71,7 @@ export default function About() {
               <div style={{ fontSize: 30, color: 'green' }}>Quizzes</div>
             </div>
           </IconButton>
-          <IconButton onClick={() => (window.location = '/')}>
+          <IconButton onClick={() => history.push('/listajogos')}>
             <div
               style={{
                 display: 'flex',

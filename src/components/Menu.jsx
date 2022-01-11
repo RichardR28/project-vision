@@ -9,12 +9,30 @@ import {
   ListItem,
   ListItemIcon,
 } from '@material-ui/core';
-import { mdiMenu, mdiAccountCircle, mdiForum, mdiGamepadSquare } from '@mdi/js';
+import {
+  mdiMenu,
+  mdiAccountCircle,
+  mdiForum,
+  mdiGamepadSquare,
+  mdiMessagePlus,
+  mdiPlusBoxMultiple,
+} from '@mdi/js';
 import Icon from '@mdi/react';
-import { isAuthenticated } from '../auth';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../actions/UserActions';
+const _ = require('lodash');
 
 export default function Menu(props) {
+  const user = useSelector((state) => state.user);
+  const localUser = localStorage.getItem('loggedUser')
+    ? JSON.parse(localStorage.getItem('loggedUser'))
+    : null;
+  const isAuthenticated = user?.name || localUser?.name ? true : false;
+  const isCreator = user?.creator === 1 || localUser?.creator === 1;
+  const adminUsers = ['Roling28'];
+  const username = user?.username || localUser?.username;
+  const isAdmin = _.findIndex(adminUsers, username);
   const [controlador, setControlador] = useState({
     drop: false,
     draw: false,
@@ -27,8 +45,26 @@ export default function Menu(props) {
         color: 'black',
         background: 'transparent',
       },
+      createGame: {
+        color: 'black',
+        background: 'transparent',
+        display: isCreator ? 'visible' : 'none',
+      },
+      createQuiz: {
+        color: 'black',
+        background: 'transparent',
+        display: isCreator ? 'visible' : 'none',
+      },
+      listaSolicitacoes: {
+        color: 'black',
+        background: 'transparent',
+        display: isAdmin ? 'visible' : 'none',
+      },
     },
   });
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   function handleDropdown() {
     setControlador((prev) => {
@@ -56,6 +92,10 @@ export default function Menu(props) {
     setControlador((prev) => {
       return { ...prev, itens: auxItens };
     });
+  }
+
+  function logoutUser() {
+    logout(dispatch);
   }
 
   const { drop, draw, itens } = controlador;
@@ -120,14 +160,17 @@ export default function Menu(props) {
                   to="/"
                   onClick={() => handleDropdown()}
                 >
-                  <Link to="/">Minha Conta</Link>
+                  Minha Conta
                 </MenuItem>
                 <MenuItem
                   component={Link}
                   to="/"
-                  onClick={() => handleDropdown()}
+                  onClick={() => {
+                    logoutUser();
+                    handleDropdown();
+                  }}
                 >
-                  <Link to="/">Logout</Link>
+                  Logout
                 </MenuItem>
               </div>
             ) : (
@@ -144,7 +187,13 @@ export default function Menu(props) {
       </div>
       <Drawer anchor="left" open={draw} onClose={() => handleDrawer()}>
         <List className="dropdownList" style={{ width: 250 }}>
-          <ListItem style={itens && itens['game'] ? itens['game'] : {}}>
+          <ListItem
+            onClick={() => {
+              history.push('/listaJogos');
+              handleDrawer();
+            }}
+            style={itens && itens['game'] ? itens['game'] : {}}
+          >
             <div
               className="drawerItem"
               onMouseEnter={() =>
@@ -162,7 +211,37 @@ export default function Menu(props) {
               <div>Jogos</div>
             </div>
           </ListItem>
-          <ListItem style={itens && itens['quiz'] ? itens['quiz'] : {}}>
+          <ListItem
+            onClick={() => {
+              history.push('/criarJogo');
+              handleDrawer();
+            }}
+            style={itens && itens['createGame'] ? itens['createGame'] : {}}
+          >
+            <div
+              className="drawerItem"
+              onMouseEnter={() => {
+                setBackgroundColorOnEnter('rgb(255 0 0 / 31%)', 'createGame');
+              }}
+              onMouseLeave={() => setBackgroundColorOnLeave('createGame')}
+            >
+              <ListItemIcon>
+                <Icon
+                  style={{ color: 'red' }}
+                  path={mdiPlusBoxMultiple}
+                  size={1.5}
+                ></Icon>
+              </ListItemIcon>
+              <div>Solicitar Novo Jogo</div>
+            </div>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              history.push('/listaQuizzes');
+              handleDrawer();
+            }}
+            style={itens && itens['quiz'] ? itens['quiz'] : {}}
+          >
             <div
               className="drawerItem"
               onMouseEnter={() =>
@@ -174,6 +253,62 @@ export default function Menu(props) {
                 <Icon style={{ color: 'green' }} path={mdiForum} size={1.5} />
               </ListItemIcon>
               <div>Quizzes</div>
+            </div>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              history.push('/createQuiz');
+              handleDrawer();
+            }}
+            style={itens && itens['createQuiz'] ? itens['createQuiz'] : {}}
+          >
+            <div
+              className="drawerItem"
+              onMouseEnter={() => {
+                setBackgroundColorOnEnter('#00800061', 'createQuiz');
+              }}
+              onMouseLeave={() => {
+                setBackgroundColorOnLeave('createQuiz');
+              }}
+            >
+              <ListItemIcon>
+                <Icon
+                  style={{ color: 'green' }}
+                  path={mdiMessagePlus}
+                  size={1.5}
+                ></Icon>
+              </ListItemIcon>
+              <div>Criar Quizz</div>
+            </div>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              history.push('/listaSolicitacoes');
+              handleDrawer();
+            }}
+            style={
+              itens && itens['listaSolicitacoes']
+                ? itens['listaSolicitacoes']
+                : {}
+            }
+          >
+            <div
+              className="drawerItem"
+              onMouseEnter={() => {
+                setBackgroundColorOnEnter('#0000ff7a', 'listaSolicitacoes');
+              }}
+              onMouseLeave={() => {
+                setBackgroundColorOnLeave('listaSolicitacoes');
+              }}
+            >
+              <ListItemIcon>
+                <Icon
+                  style={{ color: 'blue' }}
+                  path={mdiMessagePlus}
+                  size={1.5}
+                ></Icon>
+              </ListItemIcon>
+              <div>Lista de Solicitações</div>
             </div>
           </ListItem>
         </List>

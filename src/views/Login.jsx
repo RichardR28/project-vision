@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Paper, TextField, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { login } from '../actions/UserActions';
 
 export default function Login() {
   const userStore = useSelector((state) => state.user);
-  console.log(userStore);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  if (userStore?.name) {
+    isLogged();
+  }
+
+  function isLogged() {
+    history.push('/');
+  }
+
   function logar() {
-    login(username, password, dispatch);
+    login(username, password, dispatch, history);
   }
 
   return (

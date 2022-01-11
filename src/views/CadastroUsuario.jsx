@@ -3,6 +3,7 @@ import { Paper, Button } from '@material-ui/core';
 import { CustomField, SelectBox } from '../components';
 import { cpf } from 'cpf-cnpj-validator';
 import Inputmask from 'inputmask';
+import { useHistory } from 'react-router-dom';
 
 export default function CadastroUsuario() {
   const [controlador, setControlador] = useState({
@@ -19,6 +20,8 @@ export default function CadastroUsuario() {
     cidade: '',
     telefone: '',
   });
+
+  const history = useHistory();
 
   function populaPaises() {
     fetch('http://192.168.100.10:9000/address/getPaises')
@@ -204,7 +207,7 @@ export default function CadastroUsuario() {
         .then((data) => {
           if (data?.status === 200) {
             alert('Usuário criado com sucesso.');
-            window.location = '/login';
+            history.push('/login');
           } else {
             alert(
               'Ocorreu um erro durante a criação de usuário. Por favor tente novamente.',
@@ -449,7 +452,7 @@ export default function CadastroUsuario() {
           <Button
             variant="contained"
             size="small"
-            onClick={() => (window.location = '/login')}
+            onClick={() => history.push('/login')}
             style={{
               background: 'rgb(255 0 0)',
               color: 'white',

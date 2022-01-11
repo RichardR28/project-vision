@@ -43,9 +43,34 @@ create table usuarios (
     idPais int not null,
     idEstado int not null,
     idCidade int not null,
+    creator int(1) default 0,
     primary key (id),
     foreign key (genero) references generos(id),
     foreign key (idPais) references paises(id),
     foreign key (idEstado) references estados(id),
     foreign key (idCidade) references cidades(id)
+);
+
+create table quizzes (
+	id int auto_increment,
+    titulo varchar(100) not null,
+    imagem longblob not null,
+    idCriador int not null,
+    acessos int default 0,
+    descricao varchar(500),
+    dataCriacao date not null,
+    dataModificacao date,
+    primary key (id),
+    foreign key (idCriador) references usuarios(id)
+);
+
+create table solicitacoes  (
+	id int auto_increment,
+    usuario int not null,
+    description varchar(2000) not null,
+    dataSolicitacao date not null,
+    retorno bool default false,
+    idJogo int,
+	primary key (id),
+    foreign key (usuario) references usuarios(id)
 );

@@ -1,4 +1,4 @@
-export const login = (username, password, dispatch) => {
+export const login = (username, password, dispatch, redirect = null) => {
   fetch('http://192.168.100.10:9000/users/login', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
@@ -9,15 +9,20 @@ export const login = (username, password, dispatch) => {
   })
     .then((req) => req.json())
     .then((data) => {
-      dispatch({
-        type: 'LOGIN',
-        payload: data,
-      });
+      if (data?.length > 0) {
+        dispatch({
+          type: 'LOGIN',
+          payload: data,
+        });
+        redirect.push('/');
+      } else {
+        alert('Usuário não encontrado');
+      }
     });
 };
 
-export const getName = () => {
-  return {
-    type: 'GET_NAME',
-  };
+export const logout = (dispatch) => {
+  dispatch({
+    type: 'LOGOUT',
+  });
 };
