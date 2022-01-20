@@ -36,9 +36,11 @@ export const verificaEmail = (email) => {
     .then((res) => res.json())
     .then((data) => {
       if (data?.status === 200) {
+        alert('Foi enviada uma chave para a ateração para o seu e-mail!');
         return { status: 200, salt: data?.key };
       } else {
-        alert('Email inválido');
+        alert('O e-mail informado não foi encontrado.');
+        return { status: 500 };
       }
     });
 };
@@ -54,6 +56,8 @@ export const redefineSenha = (email, senha, redirect = null) => {
       if (data?.status === 200) {
         alert('Senha redefinida com sucesso!');
         redirect.push('/login');
+      } else if (data?.status === 500) {
+        alert(data.msg);
       } else {
         alert('Houve um erro durante o proocesso. Por favor tente novamente.');
       }

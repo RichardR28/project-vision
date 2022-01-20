@@ -82,7 +82,11 @@ export default function EsqueceuSenha() {
               value={email}
               onChange={(e) => setEmail(e)}
             />
-            <button className="verifyEmail" onClick={() => checkEmail()}>
+            <button
+              className="verifyEmail"
+              disabled={isValid}
+              onClick={() => checkEmail()}
+            >
               Verificar
             </button>
           </div>

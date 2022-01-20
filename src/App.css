@@ -226,6 +226,11 @@ button.verifyEmail {
   color: white;
 }
 
+button.verifyEmail:disabled {
+  cursor: not-allowed;
+  background-color: #56a05694;
+}
+
 div.confirmarRedefinicao {
   display: flex;
   width: 100%;
