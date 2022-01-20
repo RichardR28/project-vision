@@ -31,3 +31,43 @@ export const listaSolicitacoes = (dispatch, redirect = null) => {
       });
     });
 };
+
+export const recusaSolicitacao = (dispatch, id, redirect = null) => {
+  fetch('http://192.168.100.10:9000/games/declineSolicitation', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'RECUSA_SOLICITACAO',
+          payload: { id },
+        });
+        alert('Solicitaçãoo respondida com sucesso!');
+      } else {
+        alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
+      }
+    });
+};
+
+export const aceitaSolicitacao = (dispatch, id, redirect = null) => {
+  fetch('http://192.168.100.10:9000/games/acceptSolicitation', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'ACEITA_SOLICITACAO',
+          payload: { id },
+        });
+        alert('Solicitaçãoo respondida com sucesso!');
+      } else {
+        alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
+      }
+    });
+};

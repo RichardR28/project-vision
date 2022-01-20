@@ -8,6 +8,9 @@ import {
   ListaJogos,
   CriarJogo,
   ListaSolicitacoes,
+  NotFound,
+  EsqueceuSenha,
+  CriarQuiz,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -84,13 +87,16 @@ const Routes = () => (
     <Route exact path="/listaQuizzes" component={ListaQuizzes} />
     <Route exact path="/listaJogos" component={ListaJogos} />
     <Route exact path="/criarJogo" component={CriarJogo} />
+    <Route exact path="/criarQuiz" component={CriarQuiz} />
     <PublicRoute exact path="/login" component={Login} />
+    <PublicRoute exact path="/esqueceuSenha" component={EsqueceuSenha} />
     <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
     <PrivateRoute
       exact
       path="/cadastroQuiz"
       component={CadastroQuiz}
     ></PrivateRoute>
+    <Route path="*" component={NotFound} />
   </Switch>
 );
 

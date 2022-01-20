@@ -21,7 +21,17 @@ export default function Login() {
   }
 
   function logar() {
-    login(username, password, dispatch, history);
+    if (username && password) {
+      login(username, password, dispatch, history);
+    } else {
+      alert('Necessário o preenchimento de todos os campos.');
+    }
+  }
+
+  function listener(e) {
+    if (e.key === 'Enter') {
+      logar();
+    }
   }
 
   return (
@@ -62,6 +72,7 @@ export default function Login() {
                 size="small"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyPress={(e) => listener(e)}
                 inputProps={{
                   className: {
                     background: 'black',
@@ -76,6 +87,7 @@ export default function Login() {
                 size="small"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={(e) => listener(e)}
                 inputProps={{
                   className: {
                     background: 'black',
@@ -117,7 +129,7 @@ export default function Login() {
               </Link>
             </div>
             <Link
-              to="/"
+              to="/esqueceuSenha"
               style={{
                 textDecoration: 'none',
                 fontSize: 14,

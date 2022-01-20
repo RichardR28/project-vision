@@ -10,7 +10,7 @@ import store from './stores';
 function App() {
   const location = useLocation();
   const auxMenu = (
-    <div style={{ position: 'fixed', width: '100%' }}>
+    <div style={{ position: 'fixed', width: '100%', zIndex: 99999 }}>
       <Menu />
     </div>
   );

@@ -151,3 +151,99 @@ html,
   background-color: #56a056;
   margin-top: 5px;
 }
+
+.listaSolicitacao div {
+  min-width: 200px;
+}
+
+.listaSolicitacao .secondary {
+  color: gray;
+}
+
+.solicitacoesActions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.solicitacoesActions button {
+  width: 100%;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 22px;
+}
+
+.solicitacoesActions button.accept {
+  background-color: #56a056;
+}
+
+.solicitacoesActions button.decline {
+  background-color: red;
+}
+
+.pageNotFound {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageNotFound .codigo {
+  font-size: 300px;
+}
+
+.pageNotFound .texto {
+  font-size: 50px;
+}
+
+.groupEsqueceuSenha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.paperEsqueceuSenha {
+  width: 90%;
+  max-width: 1000px;
+  zoom: 1.2;
+}
+
+.paperEsqueceuSenha div {
+  margin: 0;
+}
+
+button.verifyEmail {
+  width: 100%;
+  border: none;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: #56a056;
+  color: white;
+}
+
+div.confirmarRedefinicao {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+button.confirmarRedefinicao {
+  width: 100%;
+  max-width: 500px;
+  border: none;
+  border-radius: 30px;
+  background-color: #5a5ac7fa;
+  color: white;
+}
+
+button.confirmarRedefinicao:disabled {
+  background-color: #5a5ac787;
+  cursor: not-allowed;
+}

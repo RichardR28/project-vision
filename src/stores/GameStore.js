@@ -1,10 +1,17 @@
+const _ = require('lodash');
+
 let INITIAL_STATE = {
   lista: [],
 };
 
 function setLista(payload) {
-  debugger;
   INITIAL_STATE.lista = payload;
+}
+
+function remove(id) {
+  _.remove(INITIAL_STATE.lista, {
+    id: id,
+  });
 }
 
 const gameReducer = (state = INITIAL_STATE, action) => {
@@ -14,6 +21,12 @@ const gameReducer = (state = INITIAL_STATE, action) => {
     case 'SET_SOLICITACOES':
       setLista(action.payload);
       return { ...state, lista: action.payload };
+    case 'RECUSA_SOLICITACAO':
+      remove(action.payload.id);
+      return { ...state };
+    case 'ACEITA_SOLICITACAO':
+      remove(action.payload.id);
+      return { ...state };
     default:
       return state;
   }

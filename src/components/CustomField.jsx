@@ -24,17 +24,28 @@ export default function CustomField(props) {
       <input
         id={props.id}
         name={props.name}
+        onKeyPress={(e) => (props.onKeyPress ? props.onKeyPress(e) : () => {})}
         placeholder={props.placeholder || ''}
         onChange={(e) => handleChange(e.target.value)}
         onBlur={(e) => onLeaveField(e.target.value)}
         value={props.value}
         type={props.type || 'text'}
         title={props.title || null}
-        style={{
-          height: 33,
-          borderRadius: 5,
-          border: 'solid 1px #00000078',
-        }}
+        disabled={props.disabled || null}
+        style={
+          !props.disabled
+            ? {
+                height: 33,
+                borderRadius: 5,
+                border: 'solid 1px #00000078',
+              }
+            : {
+                cursor: 'not-allowed',
+                height: 33,
+                borderRadius: 5,
+                border: 'solid 1px rgb(0 0 0 / 24%)',
+              }
+        }
       />
     </div>
   );

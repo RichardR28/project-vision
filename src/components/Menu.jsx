@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   IconButton,
   Paper,
@@ -28,11 +28,45 @@ export default function Menu(props) {
   const localUser = localStorage.getItem('loggedUser')
     ? JSON.parse(localStorage.getItem('loggedUser'))
     : null;
+  const adminUsers = ['Roling28'];
+
   const isAuthenticated = user?.name || localUser?.name ? true : false;
   const isCreator = user?.creator === 1 || localUser?.creator === 1;
-  const adminUsers = ['Roling28'];
   const username = user?.username || localUser?.username;
   const isAdmin = _.findIndex(adminUsers, username);
+
+  useEffect(() => {
+    setControlador({
+      drop: false,
+      draw: false,
+      itens: {
+        game: {
+          color: 'black',
+          background: 'transparent',
+        },
+        quiz: {
+          color: 'black',
+          background: 'transparent',
+        },
+        createGame: {
+          color: 'black',
+          background: 'transparent',
+          display: isCreator ? 'visible' : 'none',
+        },
+        createQuiz: {
+          color: 'black',
+          background: 'transparent',
+          display: isCreator ? 'visible' : 'none',
+        },
+        listaSolicitacoes: {
+          color: 'black',
+          background: 'transparent',
+          display: isAdmin ? 'visible' : 'none',
+        },
+      },
+    });
+  }, [isAdmin, isCreator, user]);
+
   const [controlador, setControlador] = useState({
     drop: false,
     draw: false,
@@ -185,7 +219,12 @@ export default function Menu(props) {
           </Dropdown>
         </IconButton>
       </div>
-      <Drawer anchor="left" open={draw} onClose={() => handleDrawer()}>
+      <Drawer
+        anchor="left"
+        style={{ zIndex: 999999 }}
+        open={draw}
+        onClose={() => handleDrawer()}
+      >
         <List className="dropdownList" style={{ width: 250 }}>
           <ListItem
             onClick={() => {
@@ -257,7 +296,7 @@ export default function Menu(props) {
           </ListItem>
           <ListItem
             onClick={() => {
-              history.push('/createQuiz');
+              history.push('/criarQuiz');
               handleDrawer();
             }}
             style={itens && itens['createQuiz'] ? itens['createQuiz'] : {}}
