@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function SelectBox(props) {
-  const [value, setValue] = useState(props.value);
   function handleChange(e) {
-    setValue(e.target.value);
     if (props.onChange) {
       props.onChange(e.target.value);
     }
@@ -19,8 +17,8 @@ export default function SelectBox(props) {
     name,
     title,
     disabled,
+    value,
   } = props;
-
   return (
     <div
       style={{
@@ -28,7 +26,9 @@ export default function SelectBox(props) {
         flexDirection: 'column',
       }}
     >
-      <div style={{ textAlign: 'start' }}>{label || 'Custom Field'}:</div>
+      <div style={{ textAlign: 'start', padding: '5px 0' }}>
+        {label || 'Custom Field'}:
+      </div>
       <select
         id={id}
         name={name}

@@ -20,7 +20,15 @@ export default function CustomField(props) {
         flexDirection: 'column',
       }}
     >
-      <div style={{ textAlign: 'start' }}>{props.label || 'Custom Field'}:</div>
+      <div
+        style={
+          props.noLabel
+            ? { display: 'none' }
+            : { textAlign: 'start', padding: '5px 0' }
+        }
+      >
+        {props.label || 'Custom Field'}:
+      </div>
       <input
         id={props.id}
         name={props.name}

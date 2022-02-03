@@ -9,6 +9,8 @@ import CriarQuiz from './CriarQuiz';
 import ListaSolicitacoes from './ListaSolicitacoes';
 import NotFound from './NotFound';
 import EsqueceuSenha from './EsqueceuSenha';
+import MeuPerfil from './MeuPerfil';
+import MinhasSolicitacoes from './MinhasSolicitacoes';
 
 export {
   Login,
@@ -22,4 +24,6 @@ export {
   NotFound,
   EsqueceuSenha,
   CriarQuiz,
+  MeuPerfil,
+  MinhasSolicitacoes,
 };

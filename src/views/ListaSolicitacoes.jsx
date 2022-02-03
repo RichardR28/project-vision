@@ -35,7 +35,6 @@ export default function ListaSolicitacoes() {
   }, [dispatch]);
   useEffect(() => {
     setSolicitacoes(game.lista);
-    console.log(game.lista);
   }, [game]);
 
   return (

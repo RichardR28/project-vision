@@ -6,51 +6,57 @@ let INITIAL_STATE = {
   id: historyUser?.id || '',
   name: historyUser?.name || '',
   email: historyUser?.email || '',
-  dataNascimeto: historyUser?.dataNascimeto || '',
+  dataNascimento: historyUser?.dataNascimento || '',
   username: historyUser?.username || '',
   telefone: historyUser?.telefone || '',
   creator: historyUser?.creator || '',
 };
 
-function setName(name) {
-  return { ...INITIAL_STATE, name: name };
-}
-
-function login(data) {
+function login(state, data) {
   const user = data[0];
-  INITIAL_STATE.id = user.id;
-  INITIAL_STATE.name = user.nome;
-  INITIAL_STATE.email = user.email;
-  INITIAL_STATE.username = user.username;
-  INITIAL_STATE.dataNascimeto = user.dataNascimento;
-  INITIAL_STATE.telefone = user.telefone;
-  INITIAL_STATE.creator = user.creator;
-  localStorage.setItem('loggedUser', JSON.stringify(INITIAL_STATE));
+  const userObj = {
+    ...state,
+    id: user.id,
+    name: user.nome,
+    email: user.email,
+    username: user.username,
+    dataNascimento: user.dataNascimento,
+    telefone: user.telefone,
+    creator: user.creator,
+  };
+  localStorage.setItem('loggedUser', JSON.stringify(userObj));
+  return userObj;
 }
 
-function logout() {
-  INITIAL_STATE.id = '';
-  INITIAL_STATE.name = '';
-  INITIAL_STATE.email = '';
-  INITIAL_STATE.username = '';
-  INITIAL_STATE.dataNascimeto = '';
-  INITIAL_STATE.telefone = '';
-  INITIAL_STATE.creator = '';
+function logout(state) {
   localStorage.removeItem('loggedUser');
+  return {
+    ...state,
+    id: '',
+    name: '',
+    email: '',
+    username: '',
+    dataNascimento: '',
+    telefone: '',
+    creator: '',
+  };
+}
+
+function alteraUsuario(state, payload) {
+  const newInfos = { ...state, telefone: payload.telefone };
+  return newInfos;
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'LOGIN':
-      login(action.payload);
-      return {};
+      return login(state, action.payload);
     case 'GET_STATE':
       return state;
-    case 'SET_NAME':
-      return setName(action.payload);
     case 'LOGOUT':
-      logout();
-      return state;
+      return logout(state);
+    case 'ALTERA_USUARIO':
+      return alteraUsuario(state, action.payload);
     default:
       return state;
   }

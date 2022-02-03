@@ -16,6 +16,7 @@ import {
   mdiGamepadSquare,
   mdiMessagePlus,
   mdiPlusBoxMultiple,
+  mdiListStatus,
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import { Link, useHistory } from 'react-router-dom';
@@ -49,6 +50,11 @@ export default function Menu(props) {
           background: 'transparent',
         },
         createGame: {
+          color: 'black',
+          background: 'transparent',
+          display: isCreator ? 'visible' : 'none',
+        },
+        minhasSolicitacoes: {
           color: 'black',
           background: 'transparent',
           display: isCreator ? 'visible' : 'none',
@@ -102,7 +108,7 @@ export default function Menu(props) {
 
   function handleDropdown() {
     setControlador((prev) => {
-      return { ...prev, drop: !prev.drop };
+      return { ...prev, drop: !drop };
     });
   }
 
@@ -191,7 +197,7 @@ export default function Menu(props) {
               <div>
                 <MenuItem
                   component={Link}
-                  to="/"
+                  to="/minhaConta"
                   onClick={() => handleDropdown()}
                 >
                   Minha Conta
@@ -272,6 +278,39 @@ export default function Menu(props) {
                 ></Icon>
               </ListItemIcon>
               <div>Solicitar Novo Jogo</div>
+            </div>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              history.push('/minhasSolicitacoes');
+              handleDrawer();
+            }}
+            style={
+              itens && itens['minhasSolicitacoes']
+                ? itens['minhasSolicitacoes']
+                : {}
+            }
+          >
+            <div
+              className="drawerItem"
+              onMouseEnter={() => {
+                setBackgroundColorOnEnter(
+                  'rgb(255 0 0 / 31%)',
+                  'minhasSolicitacoes',
+                );
+              }}
+              onMouseLeave={() =>
+                setBackgroundColorOnLeave('minhasSolicitacoes')
+              }
+            >
+              <ListItemIcon>
+                <Icon
+                  style={{ color: 'red' }}
+                  path={mdiListStatus}
+                  size={1.5}
+                ></Icon>
+              </ListItemIcon>
+              <div>Minhas Solicitações</div>
             </div>
           </ListItem>
           <ListItem

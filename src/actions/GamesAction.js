@@ -71,3 +71,18 @@ export const aceitaSolicitacao = (dispatch, id, redirect = null) => {
       }
     });
 };
+
+export const listaSolicitacoesUsuario = (dispatch, id) => {
+  fetch('http://192.168.100.10:9000/games/getSolicitacoesUsuarios', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      dispatch({
+        type: 'SET_SOLICITACOES',
+        payload: data,
+      });
+    });
+};

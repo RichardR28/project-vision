@@ -74,3 +74,19 @@ create table solicitacoes  (
 	primary key (id),
     foreign key (usuario) references usuarios(id)
 );
+
+create table perguntas (
+	id int auto_increment,
+    sequencia int(2) not null,
+    enunciado varchar(200) not null,
+    imagem longblob,
+    tipoResposta int(1) not null,
+    resposta varchar(10) not null,
+    opcao1 varchar(30),
+    opcao2 varchar(30),
+    opcao3 varchar(30),
+    opcao4 varchar(30),
+    quizId int,
+    primary key (id),
+    foreign key (quizId) references quizzes(id)
+);

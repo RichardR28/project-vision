@@ -59,7 +59,71 @@ export const redefineSenha = (email, senha, redirect = null) => {
       } else if (data?.status === 500) {
         alert(data.msg);
       } else {
-        alert('Houve um erro durante o proocesso. Por favor tente novamente.');
+        alert('Houve um erro durante o processo. Por favor tente novamente.');
+      }
+    });
+};
+
+export const buscaInformacoesUsuario = (id, email, username) => {
+  return fetch('http://192.168.100.10:9000/users/getUser', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, email, username }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        return data.result;
+      } else {
+        alert('Ocorreu um erro ao buscar as informações do usuário.');
+      }
+    });
+};
+
+export const alteraInformacoesUsuario = (
+  dispatch,
+  id,
+  telefone,
+  pais,
+  estado,
+  cidade,
+  redirect = null,
+) => {
+  fetch('http://192.168.100.10:9000/users/alteraUsuario', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, telefone, pais, estado, cidade }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'ALTERA_USUARIO',
+          payload: { telefone, pais, estado, cidade },
+        });
+        alert('Informações alteradas com sucesso.');
+        if (redirect) {
+          redirect.push('/');
+        }
+      } else {
+        alert('Ocorreu um erro na operação. Por favor tente novamente.');
+      }
+    });
+};
+
+export const alteraSenha = (id, senha, novaSenha, callback = () => {}) => {
+  fetch('http://192.168.100.10:9000/users/alterarSenha', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, senha, novaSenha }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        alert(data.msg);
+        callback();
+      } else if (data?.status === 500) {
+        alert(data.msg);
       }
     });
 };

@@ -179,7 +179,7 @@ export default function CadastroUsuario() {
     const msg = validaCampos();
     if (!msg) {
       const unmaskCPF = Inputmask.unmask(controlador.userCPF, {
-        mask: '999-99999-99',
+        mask: '999-999-999-99',
       });
       const unmaskTelefone = controlador.telefone
         ? Inputmask.unmask(controlador.telefone, {

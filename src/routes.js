@@ -11,6 +11,8 @@ import {
   NotFound,
   EsqueceuSenha,
   CriarQuiz,
+  MeuPerfil,
+  MinhasSolicitacoes,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -59,6 +61,28 @@ const PublicRoute = ({ component: Component, ...rest }) => {
   );
 };
 
+const CreatorRoute = ({ component: Component, ...rest }) => {
+  const user = useSelector((state) => state.user);
+  const localUser = localStorage.getItem('loggedUser')
+    ? JSON.parse(localStorage.getItem('loggedUser'))
+    : null;
+  const isAuthenticated = user?.name || localUser?.name ? true : false;
+  const isCreator = user?.creator === 1 || localUser?.creator === 1;
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuthenticated && isCreator ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+        )
+      }
+    />
+  );
+};
+
 const AdminRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.user);
   const localUser = localStorage.getItem('loggedUser')
@@ -86,16 +110,18 @@ const Routes = () => (
     <Route exact path="/cadastroUsuario" component={CadastroUsuario} />
     <Route exact path="/listaQuizzes" component={ListaQuizzes} />
     <Route exact path="/listaJogos" component={ListaJogos} />
-    <Route exact path="/criarJogo" component={CriarJogo} />
-    <Route exact path="/criarQuiz" component={CriarQuiz} />
     <PublicRoute exact path="/login" component={Login} />
     <PublicRoute exact path="/esqueceuSenha" component={EsqueceuSenha} />
-    <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
-    <PrivateRoute
+    <PrivateRoute exact path="/criarJogo" component={CriarJogo} />
+    <CreatorRoute exact path="/criarQuiz" component={CriarQuiz} />
+    <CreatorRoute exact path="/cadastroQuiz" component={CadastroQuiz} />
+    <CreatorRoute
       exact
-      path="/cadastroQuiz"
-      component={CadastroQuiz}
-    ></PrivateRoute>
+      path="/minhasSolicitacoes"
+      component={MinhasSolicitacoes}
+    />
+    <PrivateRoute exact path="/minhaConta" component={MeuPerfil} />
+    <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
     <Route path="*" component={NotFound} />
   </Switch>
 );

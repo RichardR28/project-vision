@@ -252,3 +252,96 @@ button.confirmarRedefinicao:disabled {
   background-color: #5a5ac787;
   cursor: not-allowed;
 }
+
+.formFields div {
+  padding: 5px;
+}
+
+.fieldEditButton {
+  width: 100%;
+}
+
+.fieldEditButton button {
+  border-radius: 6px;
+  background-color: #5a5ac7fa;
+  color: white;
+  border: none;
+  height: 33px;
+  width: 100%;
+}
+
+.fieldEditSaveButton {
+  width: 100%;
+}
+
+.fieldEditSaveButton button {
+  border-radius: 6px;
+  background-color: #56a056;
+  color: white;
+  border: none;
+  height: 33px;
+  width: 100%;
+}
+
+.fieldEditSaveButton button:disabled {
+  cursor: not-allowed;
+  background-color: #56a05694;
+}
+
+.redefinirSenha {
+  width: 90%;
+  max-width: 800px;
+  min-width: 300px;
+  justify-content: center;
+  align-items: center;
+  zoom: 1.2;
+  margin-top: 10px;
+}
+
+.redefinirSenha button {
+  border-radius: 6px;
+  background-color: #5a5ac7fa;
+  color: white;
+  border: none;
+  height: 33px;
+  width: 100%;
+}
+
+.salvaNovaSenha {
+  width: 100%;
+}
+
+.salvaNovaSenha button {
+  border-radius: 6px;
+  background-color: #56a056;
+  color: white;
+  border: none;
+  height: 33px;
+  width: 100%;
+}
+
+.salvaNovaSenha button:disabled {
+  cursor: not-allowed;
+  background-color: #56a05694;
+}
+
+.centralizado div {
+  display: flex;
+  justify-content: center;
+}
+
+button.botoesCriacaoQuiz {
+  width: 100%;
+  border-radius: 30px;
+  border: none;
+  height: 40px;
+  color: white;
+}
+
+button.salvaQuizz {
+  background-color: #56a056;
+}
+
+button.adicionaPergunta {
+  background-color: #5a5ac787;
+}
