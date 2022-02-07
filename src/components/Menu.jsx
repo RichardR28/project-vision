@@ -34,7 +34,7 @@ export default function Menu(props) {
   const isAuthenticated = user?.name || localUser?.name ? true : false;
   const isCreator = user?.creator === 1 || localUser?.creator === 1;
   const username = user?.username || localUser?.username;
-  const isAdmin = _.findIndex(adminUsers, username);
+  const isAdmin = _.indexOf(adminUsers, username) >= 0 ? true : false;
 
   useEffect(() => {
     setControlador({
@@ -114,7 +114,35 @@ export default function Menu(props) {
 
   function handleDrawer() {
     setControlador((prev) => {
-      return { ...prev, draw: !prev.draw };
+      return {
+        ...prev,
+        draw: !prev.draw,
+        itens: {
+          game: {
+            color: 'black',
+            background: 'transparent',
+          },
+          quiz: {
+            color: 'black',
+            background: 'transparent',
+          },
+          createGame: {
+            color: 'black',
+            background: 'transparent',
+            display: isCreator ? 'visible' : 'none',
+          },
+          createQuiz: {
+            color: 'black',
+            background: 'transparent',
+            display: isCreator ? 'visible' : 'none',
+          },
+          listaSolicitacoes: {
+            color: 'black',
+            background: 'transparent',
+            display: isAdmin ? 'visible' : 'none',
+          },
+        },
+      };
     });
   }
 

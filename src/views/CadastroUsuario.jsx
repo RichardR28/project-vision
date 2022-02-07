@@ -151,6 +151,7 @@ export default function CadastroUsuario() {
       country,
       estado,
       cidade,
+      emailValido,
     } = controlador;
 
     if (
@@ -159,6 +160,7 @@ export default function CadastroUsuario() {
       email &&
       senhaValida &&
       userValido &&
+      emailValido &&
       genero &&
       dataNascimento &&
       country &&
@@ -168,6 +170,8 @@ export default function CadastroUsuario() {
       return false;
     } else if (!userValido) {
       return 'Username inválido ou em uso.';
+    } else if (!emailValido) {
+      return 'Email já em uso.';
     } else if (!senhaValida) {
       return 'Senha invalida, necessário que a senha tenha no mínimo 8 caracteres, possuindo ao menos 1 número, 1 caracter especial, 1 letra maiúscula e 1 letra minúscula.';
     } else {
@@ -245,6 +249,32 @@ export default function CadastroUsuario() {
       });
   }
 
+  function validaEmail(email) {
+    const emailField = document.getElementById('email');
+    fetch('http://192.168.100.10:9000/users/validaEmail', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data?.[0].count === 0) {
+          emailField.style.borderColor = 'green';
+          setControlador((prev) => {
+            return { ...prev, emailValido: true };
+          });
+        } else {
+          emailField.style.borderColor = 'red';
+          alert('Email já cadastrado.');
+          setControlador((prev) => {
+            return { ...prev, emailValido: false };
+          });
+        }
+      });
+  }
+
   const { listaPaises, listaEstados, listaCidades, listaGeneros } = controlador;
 
   return (
@@ -309,6 +339,7 @@ export default function CadastroUsuario() {
                   return { ...prev, email: e };
                 })
               }
+              onBlur={(e) => validaEmail(e)}
               value={controlador.email}
             />
           </div>

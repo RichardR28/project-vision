@@ -40,6 +40,13 @@ export default function CustomField(props) {
         type={props.type || 'text'}
         title={props.title || null}
         disabled={props.disabled || null}
+        min={
+          props.type === 'number' &&
+          props.min !== null &&
+          props.min !== undefined
+            ? props.min
+            : null
+        }
         style={
           !props.disabled
             ? {

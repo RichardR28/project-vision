@@ -54,7 +54,7 @@ create table usuarios (
 create table quizzes (
 	id int auto_increment,
     titulo varchar(100) not null,
-    imagem longblob not null,
+    imagem varchar(500) not null,
     idCriador int not null,
     acessos int default 0,
     descricao varchar(500),
@@ -79,7 +79,7 @@ create table perguntas (
 	id int auto_increment,
     sequencia int(2) not null,
     enunciado varchar(200) not null,
-    imagem longblob,
+    imagem varchar(500),
     tipoResposta int(1) not null,
     resposta varchar(10) not null,
     opcao1 varchar(30),

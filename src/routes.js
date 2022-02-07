@@ -89,7 +89,8 @@ const AdminRoute = ({ component: Component, ...rest }) => {
     ? JSON.parse(localStorage.getItem('loggedUser'))
     : null;
   const username = user?.username || localUser?.username;
-  const isAdmin = _.findIndex(adminUsers, username);
+  const isAdmin = _.indexOf(adminUsers, username) >= 0 ? true : false;
+
   return (
     <Route
       {...rest}

@@ -46,26 +46,29 @@ export default function MinhasSolicitacoes() {
                 width: '90%',
                 margin: 15,
                 borderRadius: 30,
-                height: 52,
+                minHeight: 52,
               }}
             >
               <div
-                className="listaSolicitacao centralizado"
+                className="row"
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',
+                  textAlign: 'center',
                   alignItems: 'center',
-                  width: '100%',
-                  flexWrap: 'wrap',
-                  height: 52,
+                  justifyContent: 'center',
+                  minHeight: 52,
                 }}
               >
-                <div>{moment(item.dataSolicitacao).format('DD/MM/YYYY')}</div>
-                <div className="secondary">{item.username}</div>
-                <div className="secondary">{item.email}</div>
-                <div className="secondary">{item.nome}</div>
+                <div className="col-md-2">
+                  {moment(item.dataSolicitacao).format('DD/MM/YYYY')}
+                </div>
+                <div className="col-md-2 secondary">{item.username}</div>
+                <div className="col-md-3 secondary">{item.email}</div>
+                <div className="col-md-3 secondary">{item.nome}</div>
                 <div
-                  className={item.retorno === 0 ? 'secondary' : ''}
+                  className={
+                    item.retorno === 0 ? 'col-md-2 secondary' : 'col-md-2'
+                  }
                   style={auxStyle}
                 >
                   {status}

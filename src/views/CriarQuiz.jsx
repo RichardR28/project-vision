@@ -11,10 +11,13 @@ import {
 import { CustomField, SelectBox } from '../components';
 import Icon from '@mdi/react';
 import { mdiDelete } from '@mdi/js';
+import { sarvarQuiz } from '../actions/QuizActions';
+import { useHistory } from 'react-router-dom';
 
 export default function CriarQuiz() {
   const [perguntas, setPerguntas] = useState([]);
   const [titulo, setTitulo] = useState('');
+  const history = useHistory();
   function adicionaPergunta() {
     let seqMax = 0;
     perguntas.forEach((item) => {
@@ -81,8 +84,52 @@ export default function CriarQuiz() {
   }
 
   function handleChangeImagem(index, e) {
-    perguntas[index].imagem = e.target.value;
+    perguntas[index].imagem = e.target.files[0];
+    console.log(perguntas);
     setPerguntas([...perguntas]);
+  }
+
+  function perguntasValidas() {
+    let isValid = true;
+    perguntas.forEach((item, index) => {
+      if (item.sequencia === null) {
+        isValid = false;
+        alert(`Número de sequência da posição ${index + 1} inválido.`);
+      } else if (!item.pergunta) {
+        isValid = false;
+        alert(`A pergunta na posição ${index + 1} está incompleta.`);
+      }
+    });
+    return isValid;
+  }
+  // {
+  //   sequencia: seqMax,
+  //   pergunta: '',
+  //   tipo: 0,
+  //   resposta: '',
+  //   imagem: '',
+  //   opcoes: [
+  //     { id: 0, value: 'opção 1' },
+  //     { id: 1, value: 'opção 2' },
+  //     { id: 2, value: 'opção 3' },
+  //     { id: 3, value: 'opção 4' },
+  //   ],
+  // }
+
+  function salvar() {
+    if (titulo && perguntas?.length > 0) {
+      if (perguntasValidas()) {
+        sarvarQuiz(perguntas, history);
+      } else {
+        alert(
+          'Por favor preencha todos os campos necessários em todas as perguntas.',
+        );
+      }
+    } else {
+      alert(
+        'É necessário que possua no mínimo 1 questão e o título para realizar o salvamento.',
+      );
+    }
   }
 
   const lista = Object.entries(perguntas).map(([index, item]) => {
@@ -119,6 +166,7 @@ export default function CriarQuiz() {
                   type="number"
                   value={item.sequencia}
                   onChange={(e) => trocaOrdem(index, e)}
+                  min={0}
                 />
               </div>
               Indique o número para a ordenação
@@ -144,10 +192,9 @@ export default function CriarQuiz() {
           <div style={{ display: 'flex' }}>
             <input
               type="file"
-              id="img"
-              name="img"
+              id="imagem"
+              name="imagem"
               accept="image/*"
-              value={item.imagem}
               onChange={(e) => handleChangeImagem(index, e)}
             />
           </div>
@@ -283,7 +330,7 @@ export default function CriarQuiz() {
         <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-4">
           <button
             className="botoesCriacaoQuiz salvaQuizz"
-            onClick={() => console.log(perguntas)}
+            onClick={() => salvar()}
           >
             Salvar Quiz
           </button>

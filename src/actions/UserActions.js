@@ -16,7 +16,7 @@ export const login = (username, password, dispatch, redirect = null) => {
         });
         redirect.push('/');
       } else {
-        alert('Usuário não encontrado');
+        alert('Usuário e/ou senha incorreto(s).');
       }
     });
 };
