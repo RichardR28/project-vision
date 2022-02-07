@@ -57,9 +57,9 @@ create table quizzes (
     imagem varchar(500) not null,
     idCriador int not null,
     acessos int default 0,
-    descricao varchar(500),
+    descricao varchar(500) not null,
     dataCriacao date not null,
-    dataModificacao date,
+    status int(1) not null,
     primary key (id),
     foreign key (idCriador) references usuarios(id)
 );
@@ -78,7 +78,7 @@ create table solicitacoes  (
 create table perguntas (
 	id int auto_increment,
     sequencia int(2) not null,
-    enunciado varchar(200) not null,
+    pergunta varchar(200) not null,
     imagem varchar(500),
     tipoResposta int(1) not null,
     resposta varchar(10) not null,

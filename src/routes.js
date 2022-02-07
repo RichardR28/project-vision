@@ -3,7 +3,6 @@ import {
   Login,
   About,
   CadastroUsuario,
-  CadastroQuiz,
   ListaQuizzes,
   ListaJogos,
   CriarJogo,
@@ -13,6 +12,7 @@ import {
   CriarQuiz,
   MeuPerfil,
   MinhasSolicitacoes,
+  MeusQuizzes,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -115,7 +115,7 @@ const Routes = () => (
     <PublicRoute exact path="/esqueceuSenha" component={EsqueceuSenha} />
     <PrivateRoute exact path="/criarJogo" component={CriarJogo} />
     <CreatorRoute exact path="/criarQuiz" component={CriarQuiz} />
-    <CreatorRoute exact path="/cadastroQuiz" component={CadastroQuiz} />
+    <CreatorRoute exact path="/meusQuizzes" component={MeusQuizzes} />
     <CreatorRoute
       exact
       path="/minhasSolicitacoes"

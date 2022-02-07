@@ -17,6 +17,7 @@ import {
   mdiMessagePlus,
   mdiPlusBoxMultiple,
   mdiListStatus,
+  mdiAccountDetails,
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import { Link, useHistory } from 'react-router-dom';
@@ -64,6 +65,11 @@ export default function Menu(props) {
           background: 'transparent',
           display: isCreator ? 'visible' : 'none',
         },
+        meusQuizzes: {
+          color: 'black',
+          background: 'transparent',
+          display: isCreator ? 'visible' : 'none',
+        },
         listaSolicitacoes: {
           color: 'black',
           background: 'transparent',
@@ -90,7 +96,17 @@ export default function Menu(props) {
         background: 'transparent',
         display: isCreator ? 'visible' : 'none',
       },
+      minhasSolicitacoes: {
+        color: 'black',
+        background: 'transparent',
+        display: isCreator ? 'visible' : 'none',
+      },
       createQuiz: {
+        color: 'black',
+        background: 'transparent',
+        display: isCreator ? 'visible' : 'none',
+      },
+      meusQuizzes: {
         color: 'black',
         background: 'transparent',
         display: isCreator ? 'visible' : 'none',
@@ -131,7 +147,17 @@ export default function Menu(props) {
             background: 'transparent',
             display: isCreator ? 'visible' : 'none',
           },
+          minhasSolicitacoes: {
+            color: 'black',
+            background: 'transparent',
+            display: isCreator ? 'visible' : 'none',
+          },
           createQuiz: {
+            color: 'black',
+            background: 'transparent',
+            display: isCreator ? 'visible' : 'none',
+          },
+          meusQuizzes: {
             color: 'black',
             background: 'transparent',
             display: isCreator ? 'visible' : 'none',
@@ -385,6 +411,32 @@ export default function Menu(props) {
                 ></Icon>
               </ListItemIcon>
               <div>Criar Quizz</div>
+            </div>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              history.push('/meusQuizzes');
+              handleDrawer();
+            }}
+            style={itens && itens['meusQuizzes'] ? itens['meusQuizzes'] : {}}
+          >
+            <div
+              className="drawerItem"
+              onMouseEnter={() => {
+                setBackgroundColorOnEnter('#00800061', 'meusQuizzes');
+              }}
+              onMouseLeave={() => {
+                setBackgroundColorOnLeave('meusQuizzes');
+              }}
+            >
+              <ListItemIcon>
+                <Icon
+                  style={{ color: 'green' }}
+                  path={mdiAccountDetails}
+                  size={1.5}
+                ></Icon>
+              </ListItemIcon>
+              <div>Meus Quizzes</div>
             </div>
           </ListItem>
           <ListItem

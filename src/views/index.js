@@ -1,7 +1,6 @@
 import Login from './Login';
 import About from './About';
 import CadastroUsuario from './CadastroUsuario';
-import CadastroQuiz from './CadastroQuiz';
 import ListaQuizzes from './ListaQuizzes';
 import ListaJogos from './ListaJogos';
 import CriarJogo from './CriarJogo';
@@ -11,12 +10,12 @@ import NotFound from './NotFound';
 import EsqueceuSenha from './EsqueceuSenha';
 import MeuPerfil from './MeuPerfil';
 import MinhasSolicitacoes from './MinhasSolicitacoes';
+import MeusQuizzes from './MeusQuizzes';
 
 export {
   Login,
   About,
   CadastroUsuario,
-  CadastroQuiz,
   ListaQuizzes,
   ListaJogos,
   CriarJogo,
@@ -26,4 +25,5 @@ export {
   CriarQuiz,
   MeuPerfil,
   MinhasSolicitacoes,
+  MeusQuizzes,
 };

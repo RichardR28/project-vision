@@ -2,10 +2,12 @@ import { combineReducers, createStore } from 'redux';
 
 import userReducer from './UserStore';
 import gameReducer from './GameStore';
+import quizReducer from './QuizStore';
 
 const rootReducers = combineReducers({
   user: userReducer,
   game: gameReducer,
+  quiz: quizReducer,
 });
 
 const store = createStore(

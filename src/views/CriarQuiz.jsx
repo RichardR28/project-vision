@@ -13,10 +13,14 @@ import Icon from '@mdi/react';
 import { mdiDelete } from '@mdi/js';
 import { sarvarQuiz } from '../actions/QuizActions';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function CriarQuiz() {
+  const user = useSelector((state) => state.user);
   const [perguntas, setPerguntas] = useState([]);
   const [titulo, setTitulo] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [logo, setLogo] = useState('');
   const history = useHistory();
   function adicionaPergunta() {
     let seqMax = 0;
@@ -85,41 +89,59 @@ export default function CriarQuiz() {
 
   function handleChangeImagem(index, e) {
     perguntas[index].imagem = e.target.files[0];
-    console.log(perguntas);
     setPerguntas([...perguntas]);
   }
 
   function perguntasValidas() {
     let isValid = true;
-    perguntas.forEach((item, index) => {
-      if (item.sequencia === null) {
-        isValid = false;
-        alert(`Número de sequência da posição ${index + 1} inválido.`);
-      } else if (!item.pergunta) {
-        isValid = false;
-        alert(`A pergunta na posição ${index + 1} está incompleta.`);
-      }
-    });
+    if (!titulo || !logo) {
+      alert('Necessário inserir um título e uma imagem para o quiz.');
+      isValid = false;
+    } else {
+      perguntas.forEach((item, index) => {
+        if (item.sequencia === null) {
+          isValid = false;
+          alert(`Número de sequência da posição ${index + 1} inválido.`);
+        } else if (!item.pergunta) {
+          isValid = false;
+          alert(`A pergunta na posição ${index + 1} está incompleta.`);
+        } else if (item.tipo !== 0 && item.tipo !== 1) {
+          alert(
+            `O tipo de resposta na posição ${index + 1} não está preenchido.`,
+          );
+          isValid = false;
+        } else if (!item.resposta) {
+          alert(
+            `Necessário indicar a resposta correta na posição ${index + 1}.`,
+          );
+          isValid = false;
+        } else if (
+          item.tipo === 1 &&
+          (!item.opcoes[0].value ||
+            !item.opcoes[1].value ||
+            !item.opcoes[2].value ||
+            !item.opcoes[3].value)
+        ) {
+          alert(
+            `Para esse tipo de resposta tadas as opções devem possuir texto indicativo. Texto faltante na posição ${
+              index + 1
+            }.`,
+          );
+          isValid = false;
+        }
+      });
+    }
     return isValid;
   }
-  // {
-  //   sequencia: seqMax,
-  //   pergunta: '',
-  //   tipo: 0,
-  //   resposta: '',
-  //   imagem: '',
-  //   opcoes: [
-  //     { id: 0, value: 'opção 1' },
-  //     { id: 1, value: 'opção 2' },
-  //     { id: 2, value: 'opção 3' },
-  //     { id: 3, value: 'opção 4' },
-  //   ],
-  // }
+
+  function handleChangeLogo(e) {
+    setLogo(e.target.files[0]);
+  }
 
   function salvar() {
-    if (titulo && perguntas?.length > 0) {
+    if (perguntas?.length > 0) {
       if (perguntasValidas()) {
-        sarvarQuiz(perguntas, history);
+        sarvarQuiz(user, titulo, descricao, logo, perguntas, history);
       } else {
         alert(
           'Por favor preencha todos os campos necessários em todas as perguntas.',
@@ -127,7 +149,7 @@ export default function CriarQuiz() {
       }
     } else {
       alert(
-        'É necessário que possua no mínimo 1 questão e o título para realizar o salvamento.',
+        'É necessário que possua no mínimo 1 questão para realizar o salvamento.',
       );
     }
   }
@@ -299,7 +321,7 @@ export default function CriarQuiz() {
         marginTop: 10,
       }}
     >
-      <div
+      <Paper
         className="row"
         style={{
           maxWidth: 1400,
@@ -307,6 +329,8 @@ export default function CriarQuiz() {
           margin: 10,
           textAlign: 'center',
           alignItems: 'center',
+          padding: '15px 0',
+          borderRadius: 15,
         }}
       >
         <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-4">
@@ -320,6 +344,15 @@ export default function CriarQuiz() {
           />
         </div>
         <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-4">
+          <input
+            type="file"
+            id="imagemLogo"
+            name="imagemLogo"
+            accept="image/*"
+            onChange={(e) => handleChangeLogo(e)}
+          />
+        </div>
+        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-2">
           <button
             className="botoesCriacaoQuiz adicionaPergunta"
             onClick={() => adicionaPergunta()}
@@ -327,7 +360,7 @@ export default function CriarQuiz() {
             Adicionar Nova Pergunta
           </button>
         </div>
-        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-4">
+        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-2">
           <button
             className="botoesCriacaoQuiz salvaQuizz"
             onClick={() => salvar()}
@@ -335,7 +368,20 @@ export default function CriarQuiz() {
             Salvar Quiz
           </button>
         </div>
-      </div>
+        <div className="col-xs-12">
+          <textarea
+            placeholder="Indique o objetivo para esse quiz."
+            rows="3"
+            style={{
+              width: '100%',
+              border: '0.5px solid #b5b5b5',
+              borderRadius: 10,
+            }}
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+          ></textarea>
+        </div>
+      </Paper>
       {lista}
     </div>
   );
