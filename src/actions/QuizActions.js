@@ -1,3 +1,4 @@
+import { host } from './backendConnection';
 export const sarvarQuiz = (
   user,
   titulo,
@@ -79,6 +80,24 @@ export const ativaQuiz = (dispatch, id) => {
         dispatch({
           type: 'ATIVA_QUIZ',
           payload: { id },
+        });
+      } else {
+        alert('Ocorreu um erro durante o processo. Por favor tente novamente.');
+      }
+    });
+};
+
+export const listaQuizzes = (dispatch) => {
+  fetch(`${host}/quizzes/listaQuizzes`, {
+    method: 'get',
+    headers: { 'Content-type': 'application/json' },
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'SET_QUIZZES',
+          payload: data.result,
         });
       } else {
         alert('Ocorreu um erro durante o processo. Por favor tente novamente.');

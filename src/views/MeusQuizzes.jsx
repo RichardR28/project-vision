@@ -85,12 +85,9 @@ export default function MeusQuizzes() {
                   }}
                 >
                   <div>Título: {item.titulo}</div>
-                  <div style={{ display: 'flex' }}>
-                    Data e Criação:
-                    <div style={{ paddingLeft: 10 }}>
-                      {moment(item.dataSolicitacao).format('DD/MM/YYYY')}
-                    </div>
-                  </div>
+                  <div>{`Data de Criação: ${moment(item.dataSolicitacao).format(
+                    'DD/MM/YYYY',
+                  )}`}</div>
                   <div className="secondary">Acessos: {item.acessos}</div>
                   <div
                     style={{

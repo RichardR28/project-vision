@@ -6,6 +6,7 @@ import { Menu } from './components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './stores';
+import { LinearProgress } from '@material-ui/core';
 
 function App() {
   const location = useLocation();
@@ -14,10 +15,18 @@ function App() {
       <Menu />
     </div>
   );
+
+  window.onload = () => {
+    document.getElementById('loader').style.display = 'none';
+  };
+
   return (
     <div className="App">
       <Provider store={store}>
         {location.pathname !== '/login' ? auxMenu : null}
+        <div style={{ position: 'fixed', top: 50, width: '100%' }}>
+          <LinearProgress id="loader" style={{ display: 'none' }} />
+        </div>
         <div
           style={
             location.pathname !== '/login'
