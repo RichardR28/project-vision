@@ -14,7 +14,7 @@ import {
   buscaEstados,
   buscaCidades,
 } from '../actions/AddressActions';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 
 export default function MeuPerfil() {
   const user = useSelector((state) => state.user);

@@ -104,3 +104,78 @@ export const listaQuizzes = (dispatch) => {
       }
     });
 };
+
+export const realizarQuiz = (dispatch, id, redirect) => {
+  dispatch({
+    type: 'SELECIONA_QUIZ',
+    payload: { id },
+  });
+  redirect.push('/responderQuiz');
+};
+
+export const buscaTeste = (dispatch, id, redirect) => {
+  fetch(`${host}/quizzes/buscaTeste`, {
+    method: 'post',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ id }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'SET_LISTA_PERGUNTAS',
+          payload: data.result,
+        });
+      } else {
+        alert('Não foi possivel Encontrar o teste. Por favor tente novamente.');
+        redirect.push('/listaQuizzes');
+      }
+    });
+};
+
+export const concluirTeste = (
+  dispatch,
+  userId,
+  quizId,
+  respostas,
+  redirect,
+) => {
+  fetch(`${host}/quizzes/salvarRespostas`, {
+    method: 'post',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ quizId, userId, respostas }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        alert(
+          'Teste finalizado com sucesso!. Verifique o resultado na página "Meus Resultados".',
+        );
+        dispatch({
+          type: 'TESTE_CONCLUIDO',
+        });
+        redirect.push('/listaQuizzes');
+      } else {
+        alert('Ocorreu um erro durante o processo. Por favor tente novamente.');
+      }
+    });
+};
+
+export const buscaResultados = (dispatch, id) => {
+  fetch(`${host}/quizzes/buscarResultados`, {
+    method: 'post',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ userId: id }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'SET_QUIZZES_RESULTS',
+          payload: data.result,
+        });
+      } else {
+        alert('Ocorreu um erro durante o processo. Por favor tente novamente.');
+      }
+    });
+};

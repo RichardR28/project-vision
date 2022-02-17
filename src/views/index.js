@@ -11,6 +11,8 @@ import EsqueceuSenha from './EsqueceuSenha';
 import MeuPerfil from './MeuPerfil';
 import MinhasSolicitacoes from './MinhasSolicitacoes';
 import MeusQuizzes from './MeusQuizzes';
+import FazerQuiz from './FazerQuiz';
+import MeusResultados from './MeusResultados';
 
 export {
   Login,
@@ -26,4 +28,6 @@ export {
   MeuPerfil,
   MinhasSolicitacoes,
   MeusQuizzes,
+  FazerQuiz,
+  MeusResultados,
 };

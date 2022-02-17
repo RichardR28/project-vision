@@ -13,6 +13,8 @@ import {
   MeuPerfil,
   MinhasSolicitacoes,
   MeusQuizzes,
+  FazerQuiz,
+  MeusResultados,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -34,7 +36,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          <Redirect
+            to={{ pathname: '/login', state: { from: props.location } }}
+          />
         )
       }
     />
@@ -122,6 +126,8 @@ const Routes = () => (
       component={MinhasSolicitacoes}
     />
     <PrivateRoute exact path="/minhaConta" component={MeuPerfil} />
+    <PrivateRoute exact path="/responderQuiz" component={FazerQuiz} />
+    <PrivateRoute exact path="/resultados" component={MeusResultados} />
     <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
     <Route path="*" component={NotFound} />
   </Switch>

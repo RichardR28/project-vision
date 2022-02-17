@@ -21,6 +21,8 @@ export default function CadastroUsuario() {
     telefone: '',
   });
 
+  let emailValido = false;
+  let userValido = false;
   const history = useHistory();
 
   function populaPaises() {
@@ -140,10 +142,10 @@ export default function CadastroUsuario() {
   }
 
   function validaCampos() {
+    debugger;
     const {
       userCPF,
       nome,
-      userValido,
       email,
       senhaValida,
       genero,
@@ -151,7 +153,6 @@ export default function CadastroUsuario() {
       country,
       estado,
       cidade,
-      emailValido,
     } = controlador;
 
     if (
@@ -169,7 +170,7 @@ export default function CadastroUsuario() {
     ) {
       return false;
     } else if (!userValido) {
-      return 'Username inválido ou em uso.';
+      return 'Usuário inválido ou em uso.';
     } else if (!emailValido) {
       return 'Email já em uso.';
     } else if (!senhaValida) {
@@ -223,9 +224,9 @@ export default function CadastroUsuario() {
     }
   }
 
-  function validaUsername(username) {
+  async function validaUsername(username) {
     const userField = document.getElementById('user');
-    fetch('http://192.168.100.10:9000/users/validaUsername', {
+    await fetch('http://192.168.100.10:9000/users/validaUsername', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -236,22 +237,18 @@ export default function CadastroUsuario() {
       .then((data) => {
         if (data?.[0].count === 0) {
           userField.style.borderColor = 'green';
-          setControlador((prev) => {
-            return { ...prev, userValido: true };
-          });
+          userValido = true;
         } else {
           userField.style.borderColor = 'red';
           alert('Username já em uso.');
-          setControlador((prev) => {
-            return { ...prev, userValido: false };
-          });
+          userValido = false;
         }
       });
   }
 
-  function validaEmail(email) {
+  async function validaEmail(email) {
     const emailField = document.getElementById('email');
-    fetch('http://192.168.100.10:9000/users/validaEmail', {
+    await fetch('http://192.168.100.10:9000/users/validaEmail', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -262,15 +259,11 @@ export default function CadastroUsuario() {
       .then((data) => {
         if (data?.[0].count === 0) {
           emailField.style.borderColor = 'green';
-          setControlador((prev) => {
-            return { ...prev, emailValido: true };
-          });
+          emailValido = true;
         } else {
           emailField.style.borderColor = 'red';
           alert('Email já cadastrado.');
-          setControlador((prev) => {
-            return { ...prev, emailValido: false };
-          });
+          emailValido = false;
         }
       });
   }
@@ -500,7 +493,15 @@ export default function CadastroUsuario() {
               color: 'white',
               width: '40%',
             }}
-            onClick={() => createUser()}
+            onClick={async () => {
+              if (!emailValido) {
+                await validaEmail(controlador.email);
+              }
+              if (!userValido) {
+                await validaUsername(controlador.user);
+              }
+              createUser();
+            }}
           >
             Salvar
           </Button>

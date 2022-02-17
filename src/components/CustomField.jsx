@@ -40,6 +40,7 @@ export default function CustomField(props) {
         type={props.type || 'text'}
         title={props.title || null}
         disabled={props.disabled || null}
+        maxLength={props.maxLength || null}
         min={
           props.type === 'number' &&
           props.min !== null &&

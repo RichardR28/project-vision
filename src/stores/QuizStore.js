@@ -2,6 +2,9 @@ const _ = require('lodash');
 
 let INITIAL_STATE = {
   lista: [],
+  activeQuiz: '',
+  perguntas: [],
+  resultados: [],
 };
 
 function setLista(payload) {
@@ -22,6 +25,22 @@ function desativa(id) {
   INITIAL_STATE.lista[aux].status = 0;
 }
 
+function setActiveQuiz(state, id) {
+  return { ...state, activeQuiz: id };
+}
+
+function setListaPerguntas(state, payload) {
+  return { ...state, perguntas: payload };
+}
+
+function finalizaTesteQuiz(state) {
+  return { ...state, activeQuiz: '', perguntas: [] };
+}
+
+function setResultados(state, lista) {
+  return { ...state, resultados: lista };
+}
+
 const quizReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SET_QUIZZES':
@@ -33,6 +52,14 @@ const quizReducer = (state = INITIAL_STATE, action) => {
     case 'ATIVA_QUIZ':
       ativa(action.payload.id);
       return { ...state };
+    case 'SELECIONA_QUIZ':
+      return setActiveQuiz(state, action.payload.id);
+    case 'SET_LISTA_PERGUNTAS':
+      return setListaPerguntas(state, action.payload);
+    case 'TESTE_CONCLUIDO':
+      return finalizaTesteQuiz(state);
+    case 'SET_QUIZZES_RESULTS':
+      return setResultados(state, action.payload);
     default:
       return state;
   }

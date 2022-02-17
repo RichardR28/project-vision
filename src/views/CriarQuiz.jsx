@@ -302,6 +302,7 @@ export default function CriarQuiz() {
                 id={`campoResposta_${index}`}
                 name={`campoResposta_${index}`}
                 label="Resposta"
+                maxLength={10}
                 value={item.resposta}
                 onChange={(e) => handleChangeOptionText(index, e)}
               />

@@ -90,3 +90,16 @@ create table perguntas (
     primary key (id),
     foreign key (quizId) references quizzes(id)
 );
+
+create table respostas (
+	id int auto_increment,
+    resposta varchar(10),
+    quizId int not null,
+    perguntaId int not null,
+    userId int not null,
+    serie varchar(13) not null,
+    primary key (id),
+    foreign key (quizId) references quizzes(id),
+    foreign key (perguntaId) references perguntas(id),
+    foreign key (userId) references usuarios(id)
+);

@@ -377,18 +377,93 @@ button.adicionaPergunta {
   color: white;
 }
 
-.modalInfos div {
+.viewPerguntas {
+  font-size: 24px;
+}
+
+.viewPerguntas div.item {
+  padding: 15px;
+}
+
+.viewPerguntas div.item div {
+  width: 100%;
+}
+
+.viewPerguntas div.imagem {
+  display: flex;
+  justify-content: center;
+}
+.teste {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.opcoesRespostaQuiz label {
+  margin: 0;
+  justify-content: center;
+  width: 25%;
+  min-width: 160px;
+}
+
+.botoesSalvarTeste {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1000px;
+  width: 90%;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.botoesSalvarTeste button {
+  color: white;
+  width: 45%;
+  height: 40px;
+  margin: 10px 0px;
+  border: none;
+  border-radius: 30px;
+}
+
+.botoesSalvarTeste button.save {
+  background-color: #56a056;
+}
+
+.botoesSalvarTeste button.cancel {
+  background-color: red;
+}
+
+.dadosCartao {
+  text-align: center;
+  max-width: 300px;
+  margin: 20px !important;
+  border-radius: 30px !important;
+  overflow: hidden;
+}
+
+.dadosCartao div {
+  display: flex;
+  flex-direction: column;
   padding: 0;
   margin: 0;
-  font-size: 20px;
+}
+
+.dadosCartao div div,
+.dadosCartao div div div div div {
+  padding: 0;
+  margin: 0 !important;
+}
+
+.modalInfos {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
   padding: 10px 0;
 }
 
-.modalInfos div div.label {
-  text-align: right;
-  font-weight: bold;
-}
-
-.modalInfos div div.value {
-  text-align: center;
+.modalInfoTitle {
+  font-weight: 500;
+  color: rgb(89 72 122);
 }
