@@ -103,3 +103,34 @@ create table respostas (
     foreign key (perguntaId) references perguntas(id),
     foreign key (userId) references usuarios(id)
 );
+
+create table jogos (
+	id int auto_increment,
+    titulo varchar(100) not null,
+    imagem varchar(500) not null,
+    idCriador int not null,
+    acessos int default 0,
+    descricao varchar(500) not null,
+    dataCriacao date not null,
+    status int(1) not null,
+    codigo varchar(10) not null,
+    primary key (id),
+    foreign key (idCriador) references usuarios(id)
+);
+-- Jogos Padrões
+-- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status) 
+-- values ('Jogo para Detecção de Daltonismo 01', 'imagem', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Deuteranopia. Para jogar bbasta selecionar dentre os quadrados apresentados aquele que for diferente, ao final será exibido sua pontuação.', '2022-02-22', 1);
+
+create table pontuacoes (
+	id int auto_increment,
+    gameId int not null,
+    userId int not null,
+    resultado01 int(3) not null,
+    resultado02 int(3) not null,
+    resultado03 int(3) not null,
+    media int(3) not null,
+    serie varchar(13) not null,
+    primary key (id),
+    foreign key (gameId) references jogos(id),
+    foreign key (userId) references usuarios(id)
+);

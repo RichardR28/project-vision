@@ -15,6 +15,7 @@ import {
   MeusQuizzes,
   FazerQuiz,
   MeusResultados,
+  Game01,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -128,6 +129,7 @@ const Routes = () => (
     <PrivateRoute exact path="/minhaConta" component={MeuPerfil} />
     <PrivateRoute exact path="/responderQuiz" component={FazerQuiz} />
     <PrivateRoute exact path="/resultados" component={MeusResultados} />
+    <PrivateRoute exact path="/gameTeste" component={Game01} />
     <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
     <Route path="*" component={NotFound} />
   </Switch>

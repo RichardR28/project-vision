@@ -14,11 +14,6 @@ function App() {
       <Menu />
     </div>
   );
-
-  window.onload = () => {
-    document.getElementById('loader').style.display = 'none';
-  };
-
   return (
     <div className="App">
       <Provider store={store}>

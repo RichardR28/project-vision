@@ -1,5 +1,7 @@
+import { host } from './backendConnection';
+
 export const saveSolicitacao = (body, dispatch, redirect = null) => {
-  fetch('http://192.168.100.10:9000/games/saveSolicitacoes', {
+  fetch(`${host}/games/saveSolicitacoes`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -20,7 +22,7 @@ export const saveSolicitacao = (body, dispatch, redirect = null) => {
 };
 
 export const listaSolicitacoes = (dispatch, redirect = null) => {
-  fetch('http://192.168.100.10:9000/games/getSolicitacoes', {
+  fetch(`${host}/games/getSolicitacoes`, {
     method: 'get',
   })
     .then((resp) => resp.json())
@@ -33,7 +35,7 @@ export const listaSolicitacoes = (dispatch, redirect = null) => {
 };
 
 export const recusaSolicitacao = (dispatch, id, redirect = null) => {
-  fetch('http://192.168.100.10:9000/games/declineSolicitation', {
+  fetch(`${host}/games/declineSolicitation`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
@@ -53,7 +55,7 @@ export const recusaSolicitacao = (dispatch, id, redirect = null) => {
 };
 
 export const aceitaSolicitacao = (dispatch, id, redirect = null) => {
-  fetch('http://192.168.100.10:9000/games/acceptSolicitation', {
+  fetch(`${host}/games/acceptSolicitation`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
@@ -73,7 +75,7 @@ export const aceitaSolicitacao = (dispatch, id, redirect = null) => {
 };
 
 export const listaSolicitacoesUsuario = (dispatch, id) => {
-  fetch('http://192.168.100.10:9000/games/getSolicitacoesUsuarios', {
+  fetch(`${host}/games/getSolicitacoesUsuarios`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
@@ -84,5 +86,23 @@ export const listaSolicitacoesUsuario = (dispatch, id) => {
         type: 'SET_SOLICITACOES',
         payload: data,
       });
+    });
+};
+
+export const registraPontuacao = (dados) => {
+  fetch(`${host}/games/registraPontuacao`, {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(dados),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        alert('Pontuação regitrada com sucesso!');
+      } else {
+        alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
+      }
     });
 };

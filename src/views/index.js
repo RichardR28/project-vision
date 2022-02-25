@@ -13,6 +13,7 @@ import MinhasSolicitacoes from './MinhasSolicitacoes';
 import MeusQuizzes from './MeusQuizzes';
 import FazerQuiz from './FazerQuiz';
 import MeusResultados from './MeusResultados';
+import Game01 from './Game01';
 
 export {
   Login,
@@ -30,4 +31,5 @@ export {
   MeusQuizzes,
   FazerQuiz,
   MeusResultados,
+  Game01,
 };

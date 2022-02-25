@@ -467,3 +467,30 @@ button.adicionaPergunta {
   font-weight: 500;
   color: rgb(89 72 122);
 }
+
+.gameLevels {
+  margin: 0px 15px 0px 0px !important;
+  background: white !important;
+  color: rgb(89 72 122) !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  border-radius: 20px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border: none !important;
+}
+
+.pontuacaoGame div {
+  display: flex;
+  font-size: 26px;
+  color: #35383e;
+  margin: 0 10px;
+}
+
+.pontuacaoGame div div.label {
+  font-weight: 700;
+}
+
+.pontuacaoGame div div.value {
+  margin-left: 0px;
+}
