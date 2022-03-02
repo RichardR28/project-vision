@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Tab, Tabs, Paper } from '@material-ui/core';
 import { game01 } from '../gamesConfigs/Game01';
 import Icon from '@mdi/react';
 import { mdiCheckboxMarkedCircleOutline } from '@mdi/js';
 import { toInteger } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registraPontuacao } from '../actions/GamesAction';
 const _ = require('lodash');
 
 export default function Game01() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const gameId = useSelector((state) => state.game.activeGame);
   const [activeTab, setActiveTab] = useState('start');
   const [answerCount, setAnswerCount] = useState(0);
   const [answers, setAnswers] = useState({ start: [], middle: [], end: [] });
@@ -21,6 +23,13 @@ export default function Game01() {
     middle: null,
     end: null,
   });
+
+  useEffect(() => {
+    if (!gameId) {
+      history.push('/listaJogos');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleChange(e, value) {
     setActiveTab(value);
@@ -49,6 +58,7 @@ export default function Game01() {
       document.getElementById('totalResult').style.color = 'red';
     }
     setAcertos({ ...acertos });
+    registraPontuacao(dispatch, user, gameId, acertos);
   }
 
   function registraResposta(type) {
@@ -171,6 +181,44 @@ export default function Game01() {
                   );
                 })}
               </div>
+              <div
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'space-around',
+                }}
+              >
+                <button
+                  onClick={() => history.push('/listaJogos')}
+                  style={{
+                    width: '40%',
+                    background: '#c13535',
+                    height: 50,
+                    color: 'white',
+                    fontSize: 22,
+                    fontWeight: 700,
+                    border: 'none',
+                    borderRadius: 30,
+                  }}
+                >
+                  Voltar
+                </button>
+                <button
+                  onClick={() => registraResposta(false)}
+                  style={{
+                    width: '40%',
+                    background: '#5a5ac7fa',
+                    height: 50,
+                    color: 'white',
+                    fontSize: 22,
+                    fontWeight: 700,
+                    border: 'none',
+                    borderRadius: 30,
+                  }}
+                >
+                  Pular
+                </button>
+              </div>
             </Paper>
           );
         })}
@@ -226,7 +274,7 @@ export default function Game01() {
               fontSize: 38,
             }}
           >
-            <div style={{ fontWeight: 700 }}>Total:</div>
+            <div style={{ fontWeight: 700 }}>Resultado Geral:</div>
             <div style={{ marginLeft: 10 }}>{acertos.total}%</div>
           </div>
         </Paper>
@@ -255,6 +303,7 @@ export default function Game01() {
             Lista de Jogos
           </button>
           <button
+            onClick={() => history.push('/pontuacoes')}
             style={{
               borderRadius: 30,
               border: 'none',

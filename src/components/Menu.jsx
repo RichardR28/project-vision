@@ -19,6 +19,7 @@ import {
   mdiListStatus,
   mdiAccountDetails,
   mdiHistory,
+  mdiStarFace,
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import { Link, useHistory } from 'react-router-dom';
@@ -76,6 +77,11 @@ export default function Menu(props) {
           background: 'transparent',
           display: isAuthenticated ? 'visible' : 'none',
         },
+        minhasPontuacoes: {
+          color: 'black',
+          background: 'transparent',
+          display: isAuthenticated ? 'visible' : 'none',
+        },
         listaSolicitacoes: {
           color: 'black',
           background: 'transparent',
@@ -118,6 +124,11 @@ export default function Menu(props) {
         display: isCreator ? 'visible' : 'none',
       },
       meusResultados: {
+        color: 'black',
+        background: 'transparent',
+        display: isAuthenticated ? 'visible' : 'none',
+      },
+      minhasPontuacoes: {
         color: 'black',
         background: 'transparent',
         display: isAuthenticated ? 'visible' : 'none',
@@ -174,6 +185,11 @@ export default function Menu(props) {
             display: isCreator ? 'visible' : 'none',
           },
           meusResultados: {
+            color: 'black',
+            background: 'transparent',
+            display: isAuthenticated ? 'visible' : 'none',
+          },
+          minhasPontuacoes: {
             color: 'black',
             background: 'transparent',
             display: isAuthenticated ? 'visible' : 'none',
@@ -381,6 +397,37 @@ export default function Menu(props) {
                 ></Icon>
               </ListItemIcon>
               <div>Minhas Solicitações</div>
+            </div>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              history.push('/pontuacoes');
+              handleDrawer();
+            }}
+            style={
+              itens && itens['minhasPontuacoes']
+                ? itens['minhasPontuacoes']
+                : {}
+            }
+          >
+            <div
+              className="drawerItem"
+              onMouseEnter={() => {
+                setBackgroundColorOnEnter(
+                  'rgb(255 0 0 / 31%)',
+                  'minhasPontuacoes',
+                );
+              }}
+              onMouseLeave={() => setBackgroundColorOnLeave('minhasPontuacoes')}
+            >
+              <ListItemIcon>
+                <Icon
+                  style={{ color: 'red' }}
+                  path={mdiStarFace}
+                  size={1.5}
+                ></Icon>
+              </ListItemIcon>
+              <div>Minhas Pontuações</div>
             </div>
           </ListItem>
           <ListItem

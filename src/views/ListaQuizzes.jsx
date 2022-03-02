@@ -61,17 +61,14 @@ export default function ListaQuizzes() {
               />
             </CardContent>
             <CardActions className="cardActions">
-              <button className="play" onClick={() => iniciarTeste(item.id)}>
-                Fazer
-              </button>
               <button
-                className="info"
+                className="play"
                 onClick={() => {
                   setInfos(item);
                   setOpen(true);
                 }}
               >
-                Informação
+                Fazer
               </button>
             </CardActions>
           </Card>
@@ -90,7 +87,11 @@ export default function ListaQuizzes() {
     <div className="listQuizzes">
       {quizzes}
       <div>
-        <Modal open={open} onClose={() => closeModal()}>
+        <Modal
+          open={open}
+          style={{ overflow: 'scroll', paddingBottom: 20 }}
+          onClose={() => closeModal()}
+        >
           <div
             style={{
               display: 'flex',
@@ -131,11 +132,11 @@ export default function ListaQuizzes() {
                 }}
               >
                 <div className="modalInfos">
-                  <div className="modalInfoTitle">Título:</div>
+                  <div className="modalInfoTitle">Título</div>
                   <div>{infos.titulo}</div>
                 </div>
                 <div className="modalInfos">
-                  <div className="modalInfoTitle">Data de Criação:</div>
+                  <div className="modalInfoTitle">Data de Criação</div>
                   <div>
                     {infos.dataCriacao
                       ? moment(infos.dataCriacao).format('DD/MM/YYYY')
@@ -156,7 +157,12 @@ export default function ListaQuizzes() {
                   Descrição
                 </div>
                 <div
-                  style={{ fontSize: 22, width: 'inherit', textIndent: '1em' }}
+                  style={{
+                    fontSize: 22,
+                    width: 'inherit',
+                    textIndent: '1em',
+                    padding: 10,
+                  }}
                 >
                   {infos.descricao}
                 </div>
@@ -171,19 +177,19 @@ export default function ListaQuizzes() {
                 }}
               >
                 <div className="modalInfos">
-                  <div className="modalInfoTitle">Nome Criador:</div>
+                  <div className="modalInfoTitle">Nome Criador</div>
                   <div>{infos.nome}</div>
                 </div>
                 <div className="modalInfos">
-                  <div className="modalInfoTitle">Email:</div>
+                  <div className="modalInfoTitle">Email</div>
                   <div>{infos.email}</div>
                 </div>
                 <div className="modalInfos">
-                  <div className="modalInfoTitle">Contato:</div>
+                  <div className="modalInfoTitle">Contato</div>
                   <div>{infos.telefone}</div>
                 </div>
                 <div className="modalInfos">
-                  <div className="modalInfoTitle">Acessos:</div>
+                  <div className="modalInfoTitle">Acessos</div>
                   <div>{infos.acessos}</div>
                 </div>
               </div>
@@ -191,7 +197,7 @@ export default function ListaQuizzes() {
                 <button
                   onClick={() => closeModal()}
                   style={{
-                    width: '100%',
+                    width: '50%',
                     height: 50,
                     fontSize: 25,
                     background: '#c13535',
@@ -201,6 +207,21 @@ export default function ListaQuizzes() {
                   }}
                 >
                   Fechar
+                </button>
+                <button
+                  style={{
+                    width: '50%',
+                    height: 50,
+                    fontSize: 25,
+                    background: 'green',
+                    border: 'none',
+                    color: 'white',
+                    fontWeight: 700,
+                  }}
+                  className="play"
+                  onClick={() => iniciarTeste(infos.id)}
+                >
+                  Fazer
                 </button>
               </div>
             </Paper>

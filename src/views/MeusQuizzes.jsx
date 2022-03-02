@@ -51,7 +51,7 @@ export default function MeusQuizzes() {
       {quizzes?.length > 0 ? (
         quizzes.map((item) => {
           let status = '';
-          const auxStyle = { paddingLeft: 10 };
+          const auxStyle = {};
           if (item.status === 1) {
             status = 'Ativo';
             auxStyle['color'] = '#56a056';
@@ -72,32 +72,39 @@ export default function MeusQuizzes() {
               }}
             >
               <AccordionSummary
+                style={{ display: 'flex', flexDirection: 'column' }}
                 expandIcon={<Icon path={mdiChevronDown} size={1.2} />}
               >
                 <div
                   className="listaSolicitacao"
                   style={{
                     display: 'flex',
-                    justifyContent: 'space-between',
+                    justifyContent: 'center',
                     alignItems: 'center',
                     width: '100%',
                     flexWrap: 'wrap',
+                    textAlign: 'center',
                   }}
                 >
-                  <div>Título: {item.titulo}</div>
-                  <div>{`Data de Criação: ${moment(item.dataSolicitacao).format(
-                    'DD/MM/YYYY',
-                  )}`}</div>
-                  <div className="secondary">Acessos: {item.acessos}</div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      minWidth: 25,
-                      justifyContent: 'space-between',
-                      alignContent: 'center',
-                    }}
-                  >
-                    Status: <div style={auxStyle}>{status}</div>
+                  <div>
+                    <div className="quizzesManagementColumn">Título</div>
+                    <div>{item.titulo}</div>
+                  </div>
+                  <div>
+                    <div className="quizzesManagementColumn">
+                      Data de Criação
+                    </div>
+                    <div>
+                      {moment(item.dataSolicitacao).format('DD/MM/YYYY')}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="quizzesManagementColumn">Acessos</div>
+                    <div className="secondary">{item.acessos}</div>
+                  </div>
+                  <div>
+                    <div className="quizzesManagementColumn">Status</div>
+                    <div>{status}</div>
                   </div>
                 </div>
               </AccordionSummary>

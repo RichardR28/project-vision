@@ -13,6 +13,7 @@ import MinhasSolicitacoes from './MinhasSolicitacoes';
 import MeusQuizzes from './MeusQuizzes';
 import FazerQuiz from './FazerQuiz';
 import MeusResultados from './MeusResultados';
+import MinhasPontuacoes from './MinhasPontuacoes';
 import Game01 from './Game01';
 
 export {
@@ -31,5 +32,6 @@ export {
   MeusQuizzes,
   FazerQuiz,
   MeusResultados,
+  MinhasPontuacoes,
   Game01,
 };

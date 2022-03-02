@@ -15,6 +15,7 @@ import {
   MeusQuizzes,
   FazerQuiz,
   MeusResultados,
+  MinhasPontuacoes,
   Game01,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
@@ -129,7 +130,8 @@ const Routes = () => (
     <PrivateRoute exact path="/minhaConta" component={MeuPerfil} />
     <PrivateRoute exact path="/responderQuiz" component={FazerQuiz} />
     <PrivateRoute exact path="/resultados" component={MeusResultados} />
-    <PrivateRoute exact path="/gameTeste" component={Game01} />
+    <PrivateRoute exact path="/pontuacoes" component={MinhasPontuacoes} />
+    <PrivateRoute exact path="/game01" component={Game01} />
     <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
     <Route path="*" component={NotFound} />
   </Switch>

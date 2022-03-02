@@ -44,7 +44,6 @@ export default function MeusResultados() {
           };
         }
       });
-      console.log(aux);
       setLista(aux);
     }
   }, [quiz.resultados]);

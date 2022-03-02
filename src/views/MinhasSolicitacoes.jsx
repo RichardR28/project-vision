@@ -47,6 +47,7 @@ export default function MinhasSolicitacoes() {
                 margin: 15,
                 borderRadius: 30,
                 minHeight: 52,
+                padding: 10,
               }}
             >
               <div

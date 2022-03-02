@@ -89,18 +89,62 @@ export const listaSolicitacoesUsuario = (dispatch, id) => {
     });
 };
 
-export const registraPontuacao = (dados) => {
+export const registraPontuacao = (dispatch, user, gameId, pontuacao) => {
   fetch(`${host}/games/registraPontuacao`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(dados),
+    body: JSON.stringify({
+      userId: user.id,
+      gameId,
+      resultado01: pontuacao.start,
+      resultado02: pontuacao.middle,
+      resultado03: pontuacao.end,
+      media: pontuacao.total,
+    }),
   })
     .then((resp) => resp.json())
     .then((data) => {
       if (data?.status === 200) {
-        alert('Pontuação regitrada com sucesso!');
+        dispatch({
+          type: 'FINALIZA_GAME',
+        });
+        alert('Pontuação registrada com sucesso!');
+      } else {
+        alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
+      }
+    });
+};
+
+export const listaJogosAtivos = (dispatch) => {
+  fetch(`${host}/games/listaJogosAtivos`)
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'SET_LISTA_JOGOS',
+          payload: data.result,
+        });
+      } else {
+        alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
+      }
+    });
+};
+
+export const listaPontuacoesUsuario = (dispatch, id) => {
+  fetch(`${host}/games/listaPontuacoesUsuario`, {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data?.status === 200) {
+        dispatch({
+          type: 'SET_SCORES',
+          payload: data.result,
+        });
       } else {
         alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
       }
