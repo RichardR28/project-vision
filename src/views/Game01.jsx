@@ -272,10 +272,13 @@ export default function Game01() {
               justifyContent: 'center',
               marginTop: 15,
               fontSize: 38,
+              textAlign: 'center',
             }}
           >
-            <div style={{ fontWeight: 700 }}>Resultado Geral:</div>
-            <div style={{ marginLeft: 10 }}>{acertos.total}%</div>
+            <div>
+              <div style={{ fontWeight: 700 }}>Resultado Geral</div>
+              <div style={{ marginLeft: 10 }}>{acertos.total}%</div>
+            </div>
           </div>
         </Paper>
         <div
