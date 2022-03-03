@@ -72,6 +72,7 @@ export default function MeusQuizzes() {
               }}
             >
               <AccordionSummary
+                className="accordion"
                 style={{ display: 'flex', flexDirection: 'column' }}
                 expandIcon={<Icon path={mdiChevronDown} size={1.2} />}
               >
@@ -79,18 +80,18 @@ export default function MeusQuizzes() {
                   className="listaSolicitacao"
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'space-around',
                     alignItems: 'center',
                     width: '100%',
                     flexWrap: 'wrap',
                     textAlign: 'center',
                   }}
                 >
-                  <div>
+                  <div className="listaQuizzesItem">
                     <div className="quizzesManagementColumn">Título</div>
                     <div>{item.titulo}</div>
                   </div>
-                  <div>
+                  <div className="listaQuizzesItem">
                     <div className="quizzesManagementColumn">
                       Data de Criação
                     </div>
@@ -98,11 +99,11 @@ export default function MeusQuizzes() {
                       {moment(item.dataSolicitacao).format('DD/MM/YYYY')}
                     </div>
                   </div>
-                  <div>
+                  <div className="listaQuizzesItem">
                     <div className="quizzesManagementColumn">Acessos</div>
                     <div className="secondary">{item.acessos}</div>
                   </div>
-                  <div>
+                  <div className="listaQuizzesItem">
                     <div className="quizzesManagementColumn">Status</div>
                     <div>{status}</div>
                   </div>

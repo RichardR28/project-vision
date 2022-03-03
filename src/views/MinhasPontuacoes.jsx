@@ -67,24 +67,24 @@ export default function MinhasPontuacoes() {
                   className="listaPontuacoes"
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'space-around',
                     alignItems: 'center',
                     width: '100%',
                     flexWrap: 'wrap',
                     textAlign: 'center',
                   }}
                 >
-                  <div>
+                  <div className="listaPontuacoesItem">
                     <div className="scoreColumnName">Data</div>
                     <div>
                       {moment(toInteger(item.serie)).format('DD/MM/YYYY')}
                     </div>
                   </div>
-                  <div>
+                  <div className="listaPontuacoesItem">
                     <div className="scoreColumnName">Título</div>
                     <div>{item.titulo}</div>
                   </div>
-                  <div>
+                  <div className="listaPontuacoesItem">
                     <div className="scoreColumnName">Pontuação Geral</div>
                     <div
                       style={

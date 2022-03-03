@@ -168,6 +168,10 @@ html,
   color: gray;
 }
 
+.listaQuizzesItem {
+  padding-top: 10px;
+}
+
 .solicitacoesActions {
   display: flex !important;
   align-items: center !important;
@@ -506,16 +510,20 @@ button.adicionaPergunta {
   color: rgb(89 72 122);
 }
 
-.listaPontuacoes div {
-  min-width: 200px;
-}
-
 .accordion {
   display: flex !important;
   flex-direction: column !important;
 }
 
+.accordion div.MuiAccordionSummary-content {
+  width: 100% !important;
+}
+
 .quizzesManagementColumn {
   font-weight: 500;
   color: rgb(89 72 122);
+}
+
+.listaPontuacoesItem {
+  padding-top: 10px;
 }
