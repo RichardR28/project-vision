@@ -118,8 +118,13 @@ create table jogos (
     foreign key (idCriador) references usuarios(id)
 );
 -- Jogos Padrões
+-- Game 01
 -- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status) 
 -- values ('Jogo para Detecção de Daltonismo 01', 'imagem', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Deuteranopia. Para jogar bbasta selecionar dentre os quadrados apresentados aquele que for diferente, ao final será exibido sua pontuação.', '2022-02-22', 1);
+
+-- Game02
+-- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status, codigo)
+-- values ('Jogo Para Detecção de Daltonismo 02', '', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Tritanopia. Para jogar basta selecionar dentre os ciculos, todos aqueles que forem da mesma cor ao pote, em seguida clicar em adicionar ao pote ou na imagem do pote, ao final será exibido sua pontuação.', '2022-03-07', 1, 'game02');
 
 create table pontuacoes (
 	id int auto_increment,

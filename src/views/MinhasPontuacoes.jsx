@@ -41,7 +41,6 @@ export default function MinhasPontuacoes() {
         alignItems: 'center',
         flexDirection: 'column',
         marginTop: 10,
-        height: '90%',
       }}
     >
       {lista?.length > 0 ? (

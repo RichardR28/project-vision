@@ -35,17 +35,11 @@ export default function ListaJogos() {
   }
 
   function direcionarAoJogo(id, gameCode) {
-    switch (gameCode) {
-      case 'game01':
-        dispatch({
-          type: 'SET_ACTIVE_GAME',
-          payload: id,
-        });
-        history.push('/game01');
-        break;
-      default:
-        break;
-    }
+    dispatch({
+      type: 'SET_ACTIVE_GAME',
+      payload: id,
+    });
+    history.push(`/${gameCode}`);
   }
 
   return (

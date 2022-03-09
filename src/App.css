@@ -527,3 +527,7 @@ button.adicionaPergunta {
 .listaPontuacoesItem {
   padding-top: 10px;
 }
+
+.circleSelected {
+  box-shadow: inset 0 0 21em transparent, 4px 4px 6px dimgrey;
+}

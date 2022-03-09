@@ -15,6 +15,7 @@ import FazerQuiz from './FazerQuiz';
 import MeusResultados from './MeusResultados';
 import MinhasPontuacoes from './MinhasPontuacoes';
 import Game01 from './Game01';
+import Game02 from './Game02';
 
 export {
   Login,
@@ -34,4 +35,5 @@ export {
   MeusResultados,
   MinhasPontuacoes,
   Game01,
+  Game02,
 };
