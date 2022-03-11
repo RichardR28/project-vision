@@ -16,6 +16,7 @@ import MeusResultados from './MeusResultados';
 import MinhasPontuacoes from './MinhasPontuacoes';
 import Game01 from './Game01';
 import Game02 from './Game02';
+import Game03 from './Game03';
 
 export {
   Login,
@@ -36,4 +37,5 @@ export {
   MinhasPontuacoes,
   Game01,
   Game02,
+  Game03,
 };

@@ -85,7 +85,6 @@ export default function Game02() {
     acertos[activeTab] += successCount;
     setAcertos({ ...acertos });
     unselectAll();
-    console.log(successCount);
 
     if (answerCount < 2) {
       const aux = answerCount + 1;
@@ -301,7 +300,8 @@ export default function Game02() {
                   <button
                     onClick={() => history.push('/listaJogos')}
                     style={{
-                      width: '40%',
+                      width: '80%',
+                      maxWidth: 240,
                       background: '#c13535',
                       height: 50,
                       color: 'white',
@@ -312,21 +312,6 @@ export default function Game02() {
                     }}
                   >
                     Voltar
-                  </button>
-                  <button
-                    onClick={() => registraResposta()}
-                    style={{
-                      width: '40%',
-                      background: '#5a5ac7fa',
-                      height: 50,
-                      color: 'white',
-                      fontSize: 22,
-                      fontWeight: 700,
-                      border: 'none',
-                      borderRadius: 30,
-                    }}
-                  >
-                    Pular
                   </button>
                 </div>
               </Paper>

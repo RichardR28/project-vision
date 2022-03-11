@@ -18,6 +18,7 @@ import {
   MinhasPontuacoes,
   Game01,
   Game02,
+  Game03,
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -134,6 +135,7 @@ const Routes = () => (
     <PrivateRoute exact path="/pontuacoes" component={MinhasPontuacoes} />
     <PrivateRoute exact path="/game01" component={Game01} />
     <PrivateRoute exact path="/game02" component={Game02} />
+    <PrivateRoute exact path="/game03" component={Game03} />
     <AdminRoute exact path="/listaSolicitacoes" component={ListaSolicitacoes} />
     <Route path="*" component={NotFound} />
   </Switch>

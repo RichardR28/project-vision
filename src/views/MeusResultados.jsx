@@ -9,6 +9,8 @@ import {
 import Icon from '@mdi/react';
 import { mdiChevronDown } from '@mdi/js';
 import { host } from '../actions/backendConnection';
+import { toInteger } from 'lodash';
+const moment = require('moment');
 
 export default function MeusResultados() {
   const [lista, setLista] = useState([]);
@@ -40,6 +42,7 @@ export default function MeusResultados() {
             username: item.username,
             descricao: item.descricao,
             titulo: item.titulo,
+            data: moment(toInteger(item.serie)).format('DD/MM/YYYY'),
             lista: [{ resposta: item.resposta, gabarito: item.gabarito }],
           };
         }
@@ -103,6 +106,7 @@ export default function MeusResultados() {
                     alt="img"
                   />
                 </div>
+                <div style={{ fontSize: 24 }}>{item.data}</div>
                 <div style={{ fontSize: 24 }}>{item.titulo}</div>
                 <div style={percentStyle}>{score.toFixed(0)}%</div>
               </div>

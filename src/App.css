@@ -510,6 +510,10 @@ button.adicionaPergunta {
   color: rgb(89 72 122);
 }
 
+.scoreExpandedDecription div {
+  min-width: 33%;
+}
+
 .accordion {
   display: flex !important;
   flex-direction: column !important;
