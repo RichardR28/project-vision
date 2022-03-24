@@ -334,7 +334,10 @@ export default function CriarQuiz() {
           borderRadius: 15,
         }}
       >
-        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-4">
+        <div
+          style={{ marginBottom: 10 }}
+          className="col-xs-12 col-sm-6 col-md-3 col-lg-3"
+        >
           <CustomField
             noLabel
             id="titulo"
@@ -344,7 +347,10 @@ export default function CriarQuiz() {
             onChange={(e) => setTitulo(e)}
           />
         </div>
-        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-4">
+        <div
+          style={{ marginBottom: 10, display: 'flex' }}
+          className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+        >
           <input
             type="file"
             id="imagemLogo"
@@ -353,7 +359,10 @@ export default function CriarQuiz() {
             onChange={(e) => handleChangeLogo(e)}
           />
         </div>
-        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-2">
+        <div
+          style={{ marginBottom: 10 }}
+          className="col-xs-12 col-sm-6 col-md-3 col-lg-3"
+        >
           <button
             className="botoesCriacaoQuiz adicionaPergunta"
             onClick={() => adicionaPergunta()}
@@ -361,7 +370,10 @@ export default function CriarQuiz() {
             Adicionar Nova Pergunta
           </button>
         </div>
-        <div style={{ marginBottom: 10 }} className="col-xs-12 col-md-2">
+        <div
+          style={{ marginBottom: 10 }}
+          className="col-xs-12 col-sm-6 col-md-2 col-lg-3"
+        >
           <button
             className="botoesCriacaoQuiz salvaQuizz"
             onClick={() => salvar()}
