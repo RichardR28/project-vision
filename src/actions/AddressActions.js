@@ -1,5 +1,7 @@
+import { host } from './backendConnection';
+
 export const buscaPaises = () => {
-  return fetch('http://192.168.100.10:9000/address/getPaises')
+  return fetch(`${host}/address/getPaises`)
     .then((res) => res.json())
     .then((data) => {
       if (data) {
@@ -11,7 +13,7 @@ export const buscaPaises = () => {
 };
 
 export const buscaEstados = (id) => {
-  return fetch('http://192.168.100.10:9000/address/getEstados', {
+  return fetch(`${host}/address/getEstados`, {
     method: 'post',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify({ id }),
@@ -27,7 +29,7 @@ export const buscaEstados = (id) => {
 };
 
 export const buscaCidades = (id) => {
-  return fetch('http://192.168.100.10:9000/address/getCidades', {
+  return fetch(`${host}/address/getCidades`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),

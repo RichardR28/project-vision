@@ -1,5 +1,7 @@
+import { host } from './backendConnection';
+
 export const login = (username, password, dispatch, redirect = null) => {
-  fetch('http://192.168.100.10:9000/users/login', {
+  fetch(`${host}/users/login`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -28,7 +30,7 @@ export const logout = (dispatch) => {
 };
 
 export const verificaEmail = (email) => {
-  return fetch('http://192.168.100.10:9000/users/checkEmail', {
+  return fetch(`${host}/users/checkEmail`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email }),
@@ -46,7 +48,7 @@ export const verificaEmail = (email) => {
 };
 
 export const redefineSenha = (email, senha, redirect = null) => {
-  fetch('http://192.168.100.10:9000/users/redefineSenha', {
+  fetch(`${host}/users/redefineSenha`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, senha }),
@@ -65,7 +67,7 @@ export const redefineSenha = (email, senha, redirect = null) => {
 };
 
 export const buscaInformacoesUsuario = (id, email, username) => {
-  return fetch('http://192.168.100.10:9000/users/getUser', {
+  return fetch(`${host}/users/getUser`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, email, username }),
@@ -89,7 +91,7 @@ export const alteraInformacoesUsuario = (
   cidade,
   redirect = null,
 ) => {
-  fetch('http://192.168.100.10:9000/users/alteraUsuario', {
+  fetch(`${host}/users/alteraUsuario`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, telefone, pais, estado, cidade }),
@@ -112,7 +114,7 @@ export const alteraInformacoesUsuario = (
 };
 
 export const alteraSenha = (id, senha, novaSenha, callback = () => {}) => {
-  fetch('http://192.168.100.10:9000/users/alterarSenha', {
+  fetch(`${host}/users/alterarSenha`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, senha, novaSenha }),

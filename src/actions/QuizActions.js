@@ -18,7 +18,7 @@ export const sarvarQuiz = (
     }
   });
   form.append('perguntas', JSON.stringify(perguntas));
-  fetch('http://192.168.100.10:9000/quizzes/savarQuiz', {
+  fetch(`${host}/quizzes/savarQuiz`, {
     method: 'post',
     body: form,
   })
@@ -31,7 +31,7 @@ export const sarvarQuiz = (
 };
 
 export const listaQuizesUsuario = (dispatch, id) => {
-  fetch('http://192.168.100.10:9000/quizzes/listaQuizzesUsuario', {
+  fetch(`${host}/quizzes/listaQuizzesUsuario`, {
     method: 'post',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify({ id }),
@@ -50,7 +50,7 @@ export const listaQuizesUsuario = (dispatch, id) => {
 };
 
 export const desativaQuiz = (dispatch, id) => {
-  fetch('http://192.168.100.10:9000/quizzes/desativaQuiz', {
+  fetch(`${host}/quizzes/desativaQuiz`, {
     method: 'post',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify({ id }),
@@ -69,7 +69,7 @@ export const desativaQuiz = (dispatch, id) => {
 };
 
 export const ativaQuiz = (dispatch, id) => {
-  fetch('http://192.168.100.10:9000/quizzes/ativaQuiz', {
+  fetch(`${host}/quizzes/ativaQuiz`, {
     method: 'post',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify({ id }),

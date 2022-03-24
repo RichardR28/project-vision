@@ -4,6 +4,7 @@ import { CustomField, SelectBox } from '../components';
 import { cpf } from 'cpf-cnpj-validator';
 import Inputmask from 'inputmask';
 import { useHistory } from 'react-router-dom';
+import { host } from '../actions/backendConnection';
 
 export default function CadastroUsuario() {
   const [controlador, setControlador] = useState({
@@ -26,7 +27,7 @@ export default function CadastroUsuario() {
   const history = useHistory();
 
   function populaPaises() {
-    fetch('http://192.168.100.10:9000/address/getPaises')
+    fetch(`${host}/address/getPaises`)
       .then((resp) => resp.json())
       .then((data) => {
         setControlador((prev) => {
@@ -36,7 +37,7 @@ export default function CadastroUsuario() {
   }
 
   function populaEstados(id) {
-    fetch('http://192.168.100.10:9000/address/getEstados', {
+    fetch(`${host}/address/getEstados`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -52,7 +53,7 @@ export default function CadastroUsuario() {
   }
 
   function populaCidades(id) {
-    fetch('http://192.168.100.10:9000/address/getCidades', {
+    fetch(`${host}/address/getCidades`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -68,7 +69,7 @@ export default function CadastroUsuario() {
   }
 
   function populaGeneros() {
-    fetch('http://192.168.100.10:9000/users/getGeneros')
+    fetch(`${host}/users/getGeneros`)
       .then((resp) => resp.json())
       .then((data) => {
         setControlador((prev) => {
@@ -191,7 +192,7 @@ export default function CadastroUsuario() {
             mask: '(99) 9 9999-9999',
           })
         : null;
-      fetch('http://192.168.100.10:9000/users/createUser', {
+      fetch(`${host}/users/createUser`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -226,7 +227,7 @@ export default function CadastroUsuario() {
 
   async function validaUsername(username) {
     const userField = document.getElementById('user');
-    await fetch('http://192.168.100.10:9000/users/validaUsername', {
+    await fetch(`${host}/users/validaUsername`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -248,7 +249,7 @@ export default function CadastroUsuario() {
 
   async function validaEmail(email) {
     const emailField = document.getElementById('email');
-    await fetch('http://192.168.100.10:9000/users/validaEmail', {
+    await fetch(`${host}/users/validaEmail`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
