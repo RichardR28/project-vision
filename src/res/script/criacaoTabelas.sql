@@ -1,3 +1,5 @@
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+
 create table paises (
 	id int auto_increment,
     fips varchar(2) not null,
@@ -38,7 +40,7 @@ create table usuarios (
     senha varchar(250) not null,
     cpf varchar(11) not null,
     dataNascimento date not null,
-    telefone int(20),
+    telefone varchar(11),
     genero int not null,
     idPais int not null,
     idEstado int not null,

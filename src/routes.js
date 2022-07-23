@@ -22,10 +22,9 @@ import {
 } from './views';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { adminUsers } from './res/adminUsers';
 
 const _ = require('lodash');
-
-const adminUsers = ['Roling28'];
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.user);

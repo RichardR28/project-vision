@@ -25,6 +25,7 @@ import Icon from '@mdi/react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/UserActions';
+import { adminUsers } from '../res/adminUsers';
 const _ = require('lodash');
 
 export default function Menu(props) {
@@ -32,7 +33,6 @@ export default function Menu(props) {
   const localUser = localStorage.getItem('loggedUser')
     ? JSON.parse(localStorage.getItem('loggedUser'))
     : null;
-  const adminUsers = ['Roling28'];
 
   const isAuthenticated = user?.name || localUser?.name ? true : false;
   const isCreator = user?.creator === 1 || localUser?.creator === 1;
