@@ -391,9 +391,13 @@ export default function CriarQuiz() {
               borderRadius: 10,
             }}
             value={descricao}
+            maxLength={500}
             onChange={(e) => setDescricao(e.target.value)}
           ></textarea>
         </div>
+        <li style={{ textAlign: 'start' }}>
+          O número máximo é de 500 caracteres.
+        </li>
       </Paper>
       {lista}
     </div>
