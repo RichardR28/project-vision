@@ -154,6 +154,7 @@ export default function CadastroUsuario() {
       country,
       estado,
       cidade,
+      user,
     } = controlador;
 
     if (
@@ -167,7 +168,8 @@ export default function CadastroUsuario() {
       dataNascimento &&
       country &&
       estado &&
-      cidade
+      cidade &&
+      user
     ) {
       return false;
     } else if (!userValido) {
@@ -227,24 +229,30 @@ export default function CadastroUsuario() {
 
   async function validaUsername(username) {
     const userField = document.getElementById('user');
-    await fetch(`${host}/users/validaUsername`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: username,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data?.[0].count === 0) {
-          userField.style.borderColor = 'green';
-          userValido = true;
-        } else {
-          userField.style.borderColor = 'red';
-          alert('Username já em uso.');
-          userValido = false;
-        }
-      });
+    if (controlador.user && controlador.user.length > 3) {
+      await fetch(`${host}/users/validaUsername`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: username,
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data?.[0].count === 0) {
+            userField.style.borderColor = 'green';
+            userValido = true;
+          } else {
+            userField.style.borderColor = 'red';
+            alert('Username já em uso.');
+            userValido = false;
+          }
+        });
+    } else {
+      userField.style.borderColor = 'red';
+      userValido = false;
+      alert("Necessário inserir um username.");
+    }
   }
 
   async function validaEmail(email) {
@@ -312,6 +320,7 @@ export default function CadastroUsuario() {
               label="Usuário"
               name="user"
               id="user"
+              title="O username deve conter pelo menos 3 caracteres."
               onChange={(e) =>
                 setControlador((prev) => {
                   return { ...prev, user: e };

@@ -69,12 +69,12 @@ export default function Game02() {
     list.forEach((item) => {
       if (
         item.className === 'circleSelected' &&
-        item.style.background === game02[activeTab].levels[0].alterColor
+        item.value === game02[activeTab].levels[answerCount].alterColor
       ) {
         successCount++;
       } else if (
         item.className === 'circleSelected' &&
-        item.style.background === game02[activeTab].levels[0].defaultColor
+        item.value === game02[activeTab].levels[answerCount].defaultColor
       ) {
         if (successCount !== 0) {
           successCount--;
@@ -213,6 +213,7 @@ export default function Game02() {
                         <button
                           id={`circle_${activeTab}_${index}`}
                           name="circle"
+                          value={color}
                           onClick={(e) => {
                             e.currentTarget.className =
                               e.currentTarget.className === 'circleSelected'

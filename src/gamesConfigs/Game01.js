@@ -3,16 +3,16 @@ export const game01 = {
     length: 6,
     levels: [
       {
-        defaultColor: '#ebce2b',
-        alterColor: '#2cf407',
+        defaultColor: '#ffd48f',
+        alterColor: '#45f819',
       },
       {
-        defaultColor: '#ebce2b',
-        alterColor: '#7de416',
+        defaultColor: '#ffd48f',
+        alterColor: '#84ec41',
       },
       {
-        defaultColor: '#ebce2b',
-        alterColor: '#c8d524',
+        defaultColor: '#ffd48f',
+        alterColor: '#c2e068',
       },
     ],
   },
@@ -20,16 +20,16 @@ export const game01 = {
     length: 8,
     levels: [
       {
-        defaultColor: '#f54e44',
-        alterColor: '#3c9a2f',
+        defaultColor: '#ff0600',
+        alterColor: '#b27a0b',
       },
       {
-        defaultColor: '#f54e44',
-        alterColor: '#7d8036',
+        defaultColor: '#ff0600',
+        alterColor: '#cc5207',
       },
       {
-        defaultColor: '#f54e44',
-        alterColor: '#b3693d',
+        defaultColor: '#ff0600',
+        alterColor: '#d84006',
       },
     ],
   },
@@ -37,16 +37,16 @@ export const game01 = {
     length: 10,
     levels: [
       {
-        defaultColor: '#ff7128',
-        alterColor: '#c2a206',
+        defaultColor: '#f524f9',
+        alterColor: '#0095f3',
       },
       {
-        defaultColor: '#ff7128',
-        alterColor: '#d0970e',
+        defaultColor: '#f524f9',
+        alterColor: '#546ef5',
       },
       {
-        defaultColor: '#ff7128',
-        alterColor: '#e8841b',
+        defaultColor: '#f524f9',
+        alterColor: '#a449f7',
       },
     ],
   },

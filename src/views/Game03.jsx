@@ -69,12 +69,12 @@ export default function Game03() {
     list.forEach((item) => {
       if (
         item.className === 'circleSelected' &&
-        item.style.background === game03[activeTab].levels[0].alterColor
+        item.value === game03[activeTab].levels[answerCount].alterColor
       ) {
         successCount++;
       } else if (
         item.className === 'circleSelected' &&
-        item.style.background === game03[activeTab].levels[0].defaultColor
+        item.value === game03[activeTab].levels[answerCount].defaultColor
       ) {
         if (successCount !== 0) {
           successCount--;
@@ -216,6 +216,7 @@ export default function Game03() {
                       <button
                         id={`circle_${activeTab}_${index}`}
                         key={`circle_${activeTab}_${index}`}
+                        value={circle}
                         name="circle"
                         style={{
                           padding: 0,

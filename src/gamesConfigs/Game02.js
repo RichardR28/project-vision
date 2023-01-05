@@ -3,16 +3,16 @@ export const game02 = {
     length: 10,
     levels: [
       {
-        defaultColor: 'rgb(255, 166, 0)',
-        alterColor: 'rgb(255, 152, 152)',
+        defaultColor: '#3af781',
+        alterColor: '#ffdb71',
       },
       {
-        defaultColor: 'rgb(255, 166, 0)',
-        alterColor: 'rgb(255, 152, 152)',
+        defaultColor: '#3af781',
+        alterColor: '#cee275',
       },
       {
-        defaultColor: 'rgb(255, 166, 0)',
-        alterColor: 'rgb(255, 152, 152)',
+        defaultColor: '#3af781',
+        alterColor: '#89ec7b',
       },
     ],
   },
@@ -20,16 +20,16 @@ export const game02 = {
     length: 10,
     levels: [
       {
-        defaultColor: 'rgb(92, 255, 87)',
-        alterColor: 'rgb(102, 255, 211)',
+        defaultColor: '#ff8c0b',
+        alterColor: '#cead14',
       },
       {
-        defaultColor: 'rgb(92, 255, 87)',
-        alterColor: 'rgb(102, 255, 211)',
+        defaultColor: '#ff8c0b',
+        alterColor: '#daa512',
       },
       {
-        defaultColor: 'rgb(92, 255, 87)',
-        alterColor: 'rgb(102, 255, 211)',
+        defaultColor: '#ff8c0b',
+        alterColor: '#e99b0f',
       },
     ],
   },
@@ -37,16 +37,16 @@ export const game02 = {
     length: 10,
     levels: [
       {
-        defaultColor: 'rgb(182, 250, 255)',
-        alterColor: 'rgb(180, 255, 199)',
+        defaultColor: '#fd479e',
+        alterColor: '#4984c8',
       },
       {
-        defaultColor: 'rgb(182, 250, 255)',
-        alterColor: 'rgb(180, 255, 199)',
+        defaultColor: '#fd479e',
+        alterColor: '#866fba',
       },
       {
-        defaultColor: 'rgb(182, 250, 255)',
-        alterColor: 'rgb(180, 255, 199)',
+        defaultColor: '#fd479e',
+        alterColor: '#c25bac',
       },
     ],
   },
