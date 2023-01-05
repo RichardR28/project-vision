@@ -154,7 +154,7 @@ export const concluirTeste = (
         dispatch({
           type: 'TESTE_CONCLUIDO',
         });
-        redirect.push('/listaQuizzes');
+        redirect.push('/resultados');
       } else {
         alert('Ocorreu um erro durante o processo. Por favor tente novamente.');
       }
