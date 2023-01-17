@@ -161,6 +161,27 @@ export default function ListaJogos() {
               >
                 {infos.descricao}
               </div>
+              <div
+                style={{
+                  textAlign: 'center',
+                  fontSize: 24,
+                  fontWeight: 500,
+                  color: 'red',
+                }}
+              >
+                Observação
+              </div>
+              <div
+                style={{
+                  fontSize: 22,
+                  width: 'inherit',
+                  textIndent: '1em',
+                  padding: 10,
+                  color: 'red'
+                }}
+              >
+                Para maior precisão, é necessário que a configuração de brilho do dispositivo esteja no máximo possível.
+              </div>
             </div>
             <hr style={{ margin: 0 }} />
             <div

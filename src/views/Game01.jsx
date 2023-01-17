@@ -148,6 +148,9 @@ export default function Game01() {
 
           return (
             <Paper key={key} style={paperStyle}>
+              <div style={{ paddingRight: 5 }}>
+                Selecione a cor que for diferente das demais.
+              </div>
               <div
                 style={{
                   display: 'flex',

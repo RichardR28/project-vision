@@ -535,5 +535,6 @@ button.adicionaPergunta {
 }
 
 .circleSelected {
-  box-shadow: inset 0 0 21em transparent, 4px 4px 6px dimgrey;
+  /* box-shadow: inset 0 0 21em transparent, 4px 4px 6px dimgrey; */
+  box-shadow: 0 0 0 4px black;
 }

@@ -173,6 +173,9 @@ export default function Game02() {
 
             return (
               <Paper key={key} style={paperStyle}>
+                <div style={{ paddingRight: 5 }}>
+                  Selecione as bolinhas da mesma cor que o copo:
+                </div>
                 <div
                   style={{
                     display: 'flex',
