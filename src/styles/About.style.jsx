@@ -174,6 +174,8 @@ export const PresentationTitle = styled.p`
 
 export const PresentationContent = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export const PresentationLeft = styled.div`
@@ -182,6 +184,7 @@ export const PresentationLeft = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 180px;
 
   img {
     margin-bottom: 15px;
@@ -190,6 +193,10 @@ export const PresentationLeft = styled.div`
 
 export const PresentationRight = styled.div`
   width: 75%;
+
+  p {
+    text-indent: 1.5em;
+  }
 `;
 
 export const PresentationName = styled.p`

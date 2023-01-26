@@ -102,10 +102,13 @@ export default function About() {
               </style.PresentationLinks>
             </style.PresentationLeft>
             <style.PresentationRight>
-              Este projeto foi desenvolvido como parte do Trabalho de Conclusão de Curso, para a obtenção do grau de bacharel em Sistemas de Informação do Instituto Federal Catarinense e visa simplificar as interações entre plataforma e usuário, tornando os processos de identificação e triagem de daltonismo mais inclusivos à crianças, desde a fase inicial escolar, mas também adultos que possam vir a ter dificuldades quanto a realização de testes ou avaliações com um nível de complexidade mais elevado.
+              <p>
+                Este projeto foi desenvolvido como parte do Trabalho de Conclusão de Curso, para a obtenção do grau de bacharel em Sistemas de Informação do Instituto Federal Catarinense e visa simplificar as interações entre plataforma e usuário, tornando os processos de identificação e triagem de daltonismo mais inclusivos à crianças, desde a fase inicial escolar, mas também adultos que possam vir a ter dificuldades quanto a realização de testes ou avaliações com um nível de complexidade mais elevado.
+              </p>
               <br />
-              <br />
-              O resultado dos testes realizados neste site não é um diagnostico e não substitui o conselho médico de um profissional da área. Este site é informacional e somente para propósito educativo.
+              <p>
+                O resultado dos testes realizados neste site não é um diagnostico e não substitui o conselho médico de um profissional da área. Este site é informacional e somente para propósito educativo.
+              </p>
             </style.PresentationRight>
           </style.PresentationContent>
         </style.Content>
