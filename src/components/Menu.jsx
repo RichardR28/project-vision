@@ -26,6 +26,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/UserActions';
 import { adminUsers } from '../res/adminUsers';
+import logo from '../res/imagens/logo.png';
+
 const _ = require('lodash');
 
 export default function Menu(props) {
@@ -259,7 +261,9 @@ export default function Menu(props) {
           <IconButton onClick={() => handleDrawer()}>
             <Icon style={{ color: 'white' }} path={mdiMenu} size={1.2} />
           </IconButton>
-          <div>MENU</div>
+          <div>
+            <img src={logo} width={85} alt="logo" />
+          </div>
         </div>
         <IconButton
           id="profile"

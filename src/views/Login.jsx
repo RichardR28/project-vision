@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Paper, TextField, Button } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../actions/UserActions';
+import logo from '../res/imagens/logo.png';
 
 export default function Login() {
   const userStore = useSelector((state) => state.user);
@@ -60,9 +61,14 @@ export default function Login() {
             display: 'flex',
             flexDirection: 'column',
             textAlign: 'center',
+            alignItems: 'center',
           }}
         >
-          <div>LOGO</div>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', background: '#fafafa' }}>
+            <div style={{ background: '#59487A', display: 'flex', padding: 10, borderRadius: 10 }}>
+              <img src={logo} width={85} alt="logo" />
+            </div>
+          </div>
           <div className="loginForm">
             <div className="fields">
               <TextField
