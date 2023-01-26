@@ -1,95 +1,115 @@
-import React from 'react';
-import { Paper, IconButton } from '@material-ui/core';
-import { mdiForum, mdiGamepadSquare } from '@mdi/js';
-import { Icon } from '@mdi/react';
+import * as style from '../styles/About.style';
+import AboutEye from '../res/imagens/about.png';
+import quizzLogo from '../res/imagens/quizzLogo.png';
+import jogosLogo from '../res/imagens/jogosLogo.png';
+import perfil from '../res/imagens/perfil.png';
+import githubIcon from '../res/imagens/githubIcon.png';
+import linkedinIcon from '../res/imagens/linkedinIcon.png';
+import Icon from '@mdi/react';
+import { mdiChevronDoubleRight } from '@mdi/js';
 import { useHistory } from 'react-router-dom';
 
+
 export default function About() {
-  const history = useHistory();
+  const history = useHistory()
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Paper
-        elevation={5}
-        style={{
-          width: '90%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '1% 3%',
-          marginBlock: 15,
-        }}
-      >
-        <div style={{ fontSize: 40, margin: '10px 0 10px ' }}>Quem somos?</div>
-        <div style={{ fontSize: 24, width: 'inherit', textIndent: '1em' }}>
-          Um aluno do último período em bacharelado em sistemas da informação no
-          instituto federal catarinense (IFC), tentando finalizar o curso e
-          ajudar um grupo de pessoas de alguma forma durante esse porcesso. ;)
-        </div>
-        <div style={{ fontSize: 40, margin: '15px 0 10px ' }}>
-          O que fazemos?
-        </div>
-        <div style={{ fontSize: 24, width: 'inherit', textIndent: '1em' }}>
-          Procuramos fornecer um método simples e rápido para identificar, em
-          nossos usuários, possíveis problemas voltados à área da saúde,
-          inicialmete focados em alterações visuais como o daltonismo.
-        </div>
-        <div style={{ fontSize: 40, margin: '15px 0 10px ' }}>
-          Como desejamos fazer?
-        </div>
-        <div style={{ fontSize: 24, width: 'inherit', textIndent: '1em' }}>
-          Pretendemos cumprir essa tarefa de maneira que se adeque à todas as
-          faixas etárias e necessidades pessoais, ou seja, se não tem muito
-          tempo pode optar pelos quizzes, que são perguntas objetivas e de
-          resposta simples para obter um resultado mais rapidamente. Já se não
-          gosta desse formato de perguntas e respostas e quer algo mais
-          divertido temos alguns joguinhos para deixar tudo mais leve e casual.
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            marginTop: 20,
-            width: '100%',
-          }}
-        >
-          <IconButton onClick={() => history.push('/listaQuizzes')}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Icon style={{ color: 'green' }} path={mdiForum} size={4.5} />
-              <div style={{ fontSize: 30, color: 'green' }}>Quizzes</div>
-            </div>
-          </IconButton>
-          <IconButton onClick={() => history.push('/listajogos')}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Icon
-                style={{ color: 'red' }}
-                path={mdiGamepadSquare}
-                size={4.5}
+    <style.Container>
+      <style.Sector>
+        <img
+          width='100%'
+          src={AboutEye}
+          alt="Logo"
+        />
+      </style.Sector>
+      <style.Sector className='Informations'><style.Content>
+        <style.InformationsTitle>
+          DALTONISMO
+        </style.InformationsTitle>
+        <style.InformationsDescription>
+          A discromatopsia, ou daltonismo como é mais comumente conhecida, é uma deficiência visual caracterizada pela incapacidade de distinguir algumas tonalidades de cores, ou todas elas, em casos mais raros. Acredita-se hoje que o percentual de portadores dessa deficiência possa chegar a 8% da população mundial.
+        </style.InformationsDescription>
+        <style.MoreInfoBox>
+          <style.MoreInfoButtom type='buttom'>Mais informações</style.MoreInfoButtom>
+        </style.MoreInfoBox>
+        <style.Box>
+          <style.Topic>
+            <Icon path={mdiChevronDoubleRight} color="#F1B759" style={{ fontWeight: 700 }} size={1.2} />
+            <p>Soluções</p>
+          </style.Topic>
+          <style.TopicDescription>
+            Procuramos fornecer um método simples e rápido para identificar em nossos usuários possíveis problemas voltados, inicialmente, em alterações visuais.
+          </style.TopicDescription>
+          <style.Topic style={{ marginTop: 20 }}>
+            <Icon path={mdiChevronDoubleRight} color="#F1B759" style={{ fontWeight: 700 }} size={1.2} />
+            <p>Como Fazemos</p>
+          </style.Topic>
+          <style.TopicDescription>
+            Pretendemos cumprir essa tarefa de maneira que adeque todas as faixas etárias e necessidades pessoais, ou seja, se não tem muito tempo pode optar pelo <b>Quizz</b>, que são perguntas objetivas e de resposta simples para obter um resultado mais rapidamente. Já se não gosta desse formato de perguntas e respostas e quer algo mais interativo, temos alguns <b>Jogos</b> para deixar tudo mais leve e casual.
+          </style.TopicDescription>
+        </style.Box>
+      </style.Content></style.Sector>
+      <style.Sector className='Redirects'>
+        <style.Content className='flex'>
+          <style.Side>
+            <img
+              width="80%"
+              onClick={() => history.push('/listaQuizzes')}
+              style={{ maxWidth: 250 }}
+              src={quizzLogo}
+              alt="quizzLogo"
+            />
+            <p>QUIZZES</p>
+          </style.Side>
+          <style.Side>
+            <img
+              width="80%"
+              onClick={() => history.push('/listaJogos')}
+              style={{ maxWidth: 250 }}
+              src={jogosLogo}
+              alt="jogosLogo"
+            />
+            <p>JOGOS</p>
+          </style.Side>
+        </style.Content>
+      </style.Sector>
+      <style.Sector className='Presentation'>
+        <style.Content>
+          <style.PresentationTitle>
+            QUEM SOU
+          </style.PresentationTitle>
+          <style.PresentationContent>
+            <style.PresentationLeft>
+              <img
+                width={150}
+                src={perfil}
+                alt="perfil"
               />
-              <div style={{ fontSize: 30, color: 'red' }}>Jogos</div>
-            </div>
-          </IconButton>
-        </div>
-      </Paper>
-    </div>
+              <style.PresentationName>Richard Alves Roling</style.PresentationName>
+              <style.PresentationRole>Desenvolvedor Frot-end</style.PresentationRole>
+              <style.PresentationLinks>
+                <img
+                  width={32}
+                  src={linkedinIcon}
+                  onClick={() => window.open('https://www.linkedin.com/in/richardalvesroling/', '__blank')}
+                  alt="linkedin"
+                />
+                <img
+                  width={32}
+                  src={githubIcon}
+                  onClick={() => window.open('https://github.com/RichardR28', '__blank')}
+                  alt="github"
+                />
+              </style.PresentationLinks>
+            </style.PresentationLeft>
+            <style.PresentationRight>
+              Este projeto foi desenvolvido como parte do Trabalho de Conclusão de Curso, para a obtenção do grau de bacharel em Sistemas de Informação do Instituto Federal Catarinense e visa simplificar as interações entre plataforma e usuário, tornando os processos de identificação e triagem de daltonismo mais inclusivos à crianças, desde a fase inicial escolar, mas também adultos que possam vir a ter dificuldades quanto a realização de testes ou avaliações com um nível de complexidade mais elevado.
+              <br />
+              <br />
+              O resultado dos testes realizados neste site não é um diagnostico e não substitui o conselho médico de um profissional da área. Este site é informacional e somente para propósito educativo.
+            </style.PresentationRight>
+          </style.PresentationContent>
+        </style.Content>
+      </style.Sector>
+    </style.Container>
   );
 }
