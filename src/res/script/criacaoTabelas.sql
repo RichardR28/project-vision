@@ -69,7 +69,7 @@ create table quizzes (
 create table solicitacoes  (
 	id int auto_increment,
     usuario int not null,
-    description varchar(2000) not null,
+    descricao varchar(2000) not null,
     dataSolicitacao date not null,
     retorno bool default false,
     idJogo int,
