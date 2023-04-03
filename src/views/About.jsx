@@ -28,7 +28,7 @@ export default function About() {
         <style.InformationsDescription>
           A discromatopsia, ou daltonismo como é mais comumente conhecida, é uma deficiência visual caracterizada pela incapacidade de distinguir algumas tonalidades de cores, ou todas elas, em casos mais raros. Acredita-se hoje que o percentual de portadores dessa deficiência possa chegar a 8% da população mundial.
         </style.InformationsDescription>
-        <style.MoreInfoBox>
+        <style.MoreInfoBox style={{display: 'none'}}>
           <style.MoreInfoButtom type='buttom'>Mais informações</style.MoreInfoButtom>
         </style.MoreInfoBox>
         <style.Box>

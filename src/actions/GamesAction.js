@@ -14,9 +14,9 @@ export const saveSolicitacao = (body, dispatch, redirect = null) => {
       });
       if (data?.status === 200) {
         alert('Solicitação enviada com sucesso!');
-        redirect.push('/');
+        redirect.push('/minhasSolicitacoes');
       } else {
-        alert('Houve um erro durante a operação, por favor tente novamnte!');
+        alert('Houve um erro durante a operação, por favor tente novamente!');
       }
     });
 };

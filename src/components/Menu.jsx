@@ -262,7 +262,7 @@ export default function Menu(props) {
             <Icon style={{ color: 'white' }} path={mdiMenu} size={1.2} />
           </IconButton>
           <div>
-            <img src={logo} width={85} alt="logo" />
+            <img src={logo} onClick={() => history.push('/')} style={{cursor: 'pointer'}} width={85} alt="logo" />
           </div>
         </div>
         <IconButton

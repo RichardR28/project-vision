@@ -89,6 +89,7 @@ export const InformationsDescription = styled.p`
   display: flex;
   align-items: center;
   color: #59487A;
+  margin-bottom: 30px !important;
 `;
 
 export const Topic = styled.div`
