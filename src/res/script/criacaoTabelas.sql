@@ -100,6 +100,7 @@ create table respostas (
     perguntaId int not null,
     userId int not null,
     serie varchar(13) not null,
+    executante varchar(100),
     primary key (id),
     foreign key (quizId) references quizzes(id),
     foreign key (perguntaId) references perguntas(id),
@@ -140,6 +141,7 @@ create table pontuacoes (
     resultado03 int(3) not null,
     media int(3) not null,
     serie varchar(13) not null,
+    executante varchar(100),
     primary key (id),
     foreign key (gameId) references jogos(id),
     foreign key (userId) references usuarios(id)

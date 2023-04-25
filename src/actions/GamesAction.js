@@ -89,7 +89,7 @@ export const listaSolicitacoesUsuario = (dispatch, id) => {
     });
 };
 
-export const registraPontuacao = (dispatch, user, gameId, pontuacao) => {
+export const registraPontuacao = (dispatch, user, gameId, pontuacao, executorName) => {
   fetch(`${host}/games/registraPontuacao`, {
     method: 'post',
     headers: {
@@ -102,6 +102,7 @@ export const registraPontuacao = (dispatch, user, gameId, pontuacao) => {
       resultado02: pontuacao.middle,
       resultado03: pontuacao.end,
       media: pontuacao.total,
+      executor: executorName,
     }),
   })
     .then((resp) => resp.json())

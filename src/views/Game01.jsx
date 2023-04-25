@@ -7,6 +7,7 @@ import { toInteger } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registraPontuacao } from '../actions/GamesAction';
+import { CustomField } from '../components';
 const _ = require('lodash');
 
 export default function Game01() {
@@ -18,6 +19,7 @@ export default function Game01() {
   const [answerCount, setAnswerCount] = useState(0);
   const [answers, setAnswers] = useState({ start: [], middle: [], end: [] });
   const [finish, setFinish] = useState(false);
+  const [executorName, setExecutorName] = useState('');
   const [acertos, setAcertos] = useState({
     start: null,
     middle: null,
@@ -35,8 +37,8 @@ export default function Game01() {
     setActiveTab(value);
   }
 
-  function salvarTeste() {
-    document.getElementById('teste').style.display = 'none';
+  function salvarTeste(hasExecutorName) {
+    document.getElementById('executor').style.display = 'none';
     document.getElementById('resultado').style.display = '';
     setFinish(true);
     Object.entries(answers).forEach(([key, item]) => {
@@ -58,7 +60,7 @@ export default function Game01() {
       document.getElementById('totalResult').style.color = 'red';
     }
     setAcertos({ ...acertos });
-    registraPontuacao(dispatch, user, gameId, acertos);
+    registraPontuacao(dispatch, user, gameId, acertos, hasExecutorName ? executorName : null);
   }
 
   function registraResposta(type) {
@@ -75,10 +77,16 @@ export default function Game01() {
         setActiveTab('end');
         setAnswerCount(0);
       } else {
-        salvarTeste();
+        verificaNomeExecutor();
       }
     }
     setAnswers({ ...answers });
+  }
+
+  function verificaNomeExecutor() {
+    document.getElementById('teste').style.display = 'none';
+    document.getElementById('executor').style.display = 'flex';
+    // salvarTeste();
   }
 
   return (
@@ -225,6 +233,52 @@ export default function Game01() {
             </Paper>
           );
         })}
+      </div>
+      <div id="executor" style={{ padding: 30, display: 'none', justifyContent: 'center' }}>
+      <Paper
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 30
+          }}
+        >
+          <CustomField
+              label="Caso queira informar um nome para a pessoa que concluiu o teste, insira abaixo"
+              placeholder="Exemplo: Ana -> 5 ano"
+              name="nome"
+              id="nome"
+              onChange={(e) => setExecutorName(e)}
+              value={executorName}
+            />
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+              <button 
+                style={{
+                  background: '#5a5ac7fa',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 30,
+                  padding: '5px 15px',
+                  marginTop: 15,
+                }} 
+                onClick={() => salvarTeste(false)}
+              >
+                Não informar
+              </button>
+              <button
+                style={{
+                  background: '#5a5ac7fa',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 30,
+                  padding: '5px 15px',
+                  marginTop: 15,
+                }} 
+                onClick={() => salvarTeste(true)}
+              >
+                  Informar
+              </button>
+            </div>
+        </Paper>
       </div>
       <div id="resultado" style={{ padding: 30, display: 'none' }}>
         <Paper
