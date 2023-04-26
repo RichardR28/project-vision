@@ -86,7 +86,6 @@ export default function Game01() {
   function verificaNomeExecutor() {
     document.getElementById('teste').style.display = 'none';
     document.getElementById('executor').style.display = 'flex';
-    // salvarTeste();
   }
 
   return (

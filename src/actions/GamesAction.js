@@ -47,7 +47,7 @@ export const recusaSolicitacao = (dispatch, id, redirect = null) => {
           type: 'RECUSA_SOLICITACAO',
           payload: { id },
         });
-        alert('Solicitaçãoo respondida com sucesso!');
+        alert('Solicitação respondida com sucesso!');
       } else {
         alert('Ocorreu um erro durante a operação. Por favor tente novamente!');
       }

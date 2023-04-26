@@ -7,6 +7,7 @@ import { toInteger } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registraPontuacao } from '../actions/GamesAction';
+import { CustomField } from '../components';
 const _ = require('lodash');
 
 export default function Game03() {
@@ -18,6 +19,7 @@ export default function Game03() {
   const [answerCount, setAnswerCount] = useState(0);
   const [divisor, setDivisor] = useState(window.screen.width / 400);
   const [answers, setAnswers] = useState({ start: [], middle: [], end: [] });
+  const [executorName, setExecutorName] = useState('');
   const [acertos, setAcertos] = useState({
     start: null,
     middle: null,
@@ -32,12 +34,16 @@ export default function Game03() {
     if (!gameId) {
       history.push('/listaJogos');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
     calculation();
     window.addEventListener('resize', calculation());
   }, [history, gameId]);
 
-  function salvarTeste() {
-    document.getElementById('teste').style.display = 'none';
+  function salvarTeste(hasExecutorName) {
+    document.getElementById('executor').style.display = 'none';
     document.getElementById('resultado').style.display = '';
     acertos.start = toInteger((acertos.start / 21) * 100);
     acertos.middle = toInteger((acertos.middle / 21) * 100);
@@ -46,7 +52,7 @@ export default function Game03() {
       (acertos.start + acertos.middle + acertos.end) / 3,
     );
     setAcertos({ ...acertos });
-    registraPontuacao(dispatch, user, gameId, acertos);
+    registraPontuacao(dispatch, user, gameId, acertos, hasExecutorName ? executorName : null);
   }
 
   function calculation() {
@@ -97,11 +103,17 @@ export default function Game03() {
         setActiveTab('end');
         setAnswerCount(0);
       } else {
-        salvarTeste();
+        verificaNomeExecutor();
       }
     }
     setAnswers({ ...answers });
   }
+
+    function verificaNomeExecutor() {
+    document.getElementById('teste').style.display = 'none';
+    document.getElementById('executor').style.display = 'flex';
+  }
+
 
   return (
     <>
@@ -284,6 +296,52 @@ export default function Game03() {
             </Paper>
           );
         })}
+      </div>
+      <div id="executor" style={{ padding: 30, display: 'none', justifyContent: 'center' }}>
+      <Paper
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 30
+          }}
+        >
+          <CustomField
+              label="Caso queira informar um nome para a pessoa que concluiu o teste, insira abaixo"
+              placeholder="Exemplo: Ana -> 5 ano"
+              name="nome"
+              id="nome"
+              onChange={(e) => setExecutorName(e)}
+              value={executorName}
+            />
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+              <button 
+                style={{
+                  background: '#5a5ac7fa',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 30,
+                  padding: '5px 15px',
+                  marginTop: 15,
+                }} 
+                onClick={() => salvarTeste(false)}
+              >
+                Não informar
+              </button>
+              <button
+                style={{
+                  background: '#5a5ac7fa',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 30,
+                  padding: '5px 15px',
+                  marginTop: 15,
+                }} 
+                onClick={() => salvarTeste(true)}
+              >
+                  Informar
+              </button>
+            </div>
+        </Paper>
       </div>
       <div id="resultado" style={{ padding: 30, display: 'none' }}>
         <Paper

@@ -7,6 +7,7 @@ import { mdiCheckboxMarkedCircleOutline } from '@mdi/js';
 import { game02 } from '../gamesConfigs/Game02';
 import { registraPontuacao } from '../actions/GamesAction';
 import { toInteger } from 'lodash';
+import { CustomField } from '../components';
 const _ = require('lodash');
 
 export default function Game02() {
@@ -18,6 +19,7 @@ export default function Game02() {
   const [answerCount, setAnswerCount] = useState(0);
   const [divisor, setDivisor] = useState(window.screen.width / 400);
   const [answers, setAnswers] = useState({ start: [], middle: [], end: [] });
+  const [executorName, setExecutorName] = useState('');
   const [acertos, setAcertos] = useState({
     start: null,
     middle: null,
@@ -50,8 +52,8 @@ export default function Game02() {
     });
   }
 
-  function salvarTeste() {
-    document.getElementById('teste').style.display = 'none';
+  function salvarTeste(hasExecutorName) {
+    document.getElementById('executor').style.display = 'none';
     document.getElementById('resultado').style.display = '';
     acertos.start = toInteger((acertos.start / 12) * 100);
     acertos.middle = toInteger((acertos.middle / 9) * 100);
@@ -60,7 +62,7 @@ export default function Game02() {
       (acertos.start + acertos.middle + acertos.end) / 3,
     );
     setAcertos({ ...acertos });
-    registraPontuacao(dispatch, user, gameId, acertos);
+    registraPontuacao(dispatch, user, gameId, acertos, hasExecutorName ? executorName : null);
   }
 
   function registraResposta() {
@@ -97,10 +99,15 @@ export default function Game02() {
         setActiveTab('end');
         setAnswerCount(0);
       } else {
-        salvarTeste();
+        verificaNomeExecutor()
       }
     }
     setAnswers({ ...answers });
+  }
+
+  function verificaNomeExecutor() {
+    document.getElementById('teste').style.display = 'none';
+    document.getElementById('executor').style.display = 'flex';
   }
 
   return (
@@ -322,6 +329,52 @@ export default function Game02() {
             );
           })}
         </AppBar>
+      </div>
+      <div id="executor" style={{ padding: 30, display: 'none', justifyContent: 'center' }}>
+      <Paper
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 30
+          }}
+        >
+          <CustomField
+              label="Caso queira informar um nome para a pessoa que concluiu o teste, insira abaixo"
+              placeholder="Exemplo: Ana -> 5 ano"
+              name="nome"
+              id="nome"
+              onChange={(e) => setExecutorName(e)}
+              value={executorName}
+            />
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+              <button 
+                style={{
+                  background: '#5a5ac7fa',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 30,
+                  padding: '5px 15px',
+                  marginTop: 15,
+                }} 
+                onClick={() => salvarTeste(false)}
+              >
+                Não informar
+              </button>
+              <button
+                style={{
+                  background: '#5a5ac7fa',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 30,
+                  padding: '5px 15px',
+                  marginTop: 15,
+                }} 
+                onClick={() => salvarTeste(true)}
+              >
+                  Informar
+              </button>
+            </div>
+        </Paper>
       </div>
       <div id="resultado" style={{ padding: 30, display: 'none' }}>
         <Paper
