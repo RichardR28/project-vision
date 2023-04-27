@@ -42,6 +42,7 @@ export default function MeusResultados() {
             username: item.username,
             descricao: item.descricao,
             titulo: item.titulo,
+            executante: item.executante,
             data: moment(toInteger(item.serie)).format('DD/MM/YYYY'),
             lista: [{ resposta: item.resposta, gabarito: item.gabarito }],
           };
@@ -108,6 +109,9 @@ export default function MeusResultados() {
                 </div>
                 <div style={{ fontSize: 24 }}>{item.data}</div>
                 <div style={{ fontSize: 24 }}>{item.titulo}</div>
+                {item?.executante && (
+                  <div style={{ fontSize: 24 }}>Executante: {item.executante}</div>
+                  )}
                 <div style={percentStyle}>{score.toFixed(0)}%</div>
               </div>
             </AccordionSummary>

@@ -83,6 +83,12 @@ export default function MinhasPontuacoes() {
                     <div className="scoreColumnName">Título</div>
                     <div>{item.titulo}</div>
                   </div>
+                  {item?.executante && (
+                    <div className="listaPontuacoesItem">
+                      <div className="scoreColumnName">Executante</div>
+                      <div>{item.executante}</div>
+                    </div>
+                  )}
                   <div className="listaPontuacoesItem">
                     <div className="scoreColumnName">Pontuação Geral</div>
                     <div

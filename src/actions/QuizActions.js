@@ -138,18 +138,19 @@ export const concluirTeste = (
   userId,
   quizId,
   respostas,
+  executorName,
   redirect,
 ) => {
   fetch(`${host}/quizzes/salvarRespostas`, {
     method: 'post',
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify({ quizId, userId, respostas }),
+    body: JSON.stringify({ quizId, userId, respostas, executor: executorName }),
   })
     .then((resp) => resp.json())
     .then((data) => {
       if (data?.status === 200) {
         alert(
-          'Teste finalizado com sucesso!. Verifique o resultado na página "Meus Resultados".',
+          'Teste finalizado com sucesso! Verifique o resultado na página "Meus Resultados".',
         );
         dispatch({
           type: 'TESTE_CONCLUIDO',
