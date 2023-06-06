@@ -38,7 +38,7 @@ create table usuarios (
     username varchar(50) not null,
     email varchar(100) not null,
     senha varchar(250) not null,
-    cpf varchar(11) not null,
+    cpf varchar(11),
     dataNascimento date not null,
     telefone varchar(11),
     genero int not null,
