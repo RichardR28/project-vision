@@ -143,9 +143,7 @@ export default function CadastroUsuario() {
   }
 
   function validaCampos() {
-    debugger;
     const {
-      userCPF,
       nome,
       email,
       senhaValida,
@@ -158,7 +156,6 @@ export default function CadastroUsuario() {
     } = controlador;
 
     if (
-      userCPF &&
       nome &&
       email &&
       senhaValida &&
@@ -186,9 +183,9 @@ export default function CadastroUsuario() {
   function createUser() {
     const msg = validaCampos();
     if (!msg) {
-      const unmaskCPF = Inputmask.unmask(controlador.userCPF, {
+      const unmaskCPF = controlador.userCPF ? Inputmask.unmask(controlador.userCPF, {
         mask: '999-999-999-99',
-      });
+      }) : '';
       const unmaskTelefone = controlador.telefone
         ? Inputmask.unmask(controlador.telefone, {
             mask: '(99) 9 9999-9999',
