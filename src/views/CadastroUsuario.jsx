@@ -304,6 +304,7 @@ export default function CadastroUsuario() {
               label="Nome Completo"
               name="nome"
               id="nome"
+              required
               onChange={(e) =>
                 setControlador((prev) => {
                   return { ...prev, nome: e };
@@ -317,6 +318,7 @@ export default function CadastroUsuario() {
               label="Usuário"
               name="user"
               id="user"
+              required
               title="O username deve conter pelo menos 3 caracteres."
               onChange={(e) =>
                 setControlador((prev) => {
@@ -332,6 +334,7 @@ export default function CadastroUsuario() {
               label="E-mail"
               id="email"
               name="email"
+              required
               placeholder="exemplo@email.com.br"
               type="email"
               onChange={(e) =>
@@ -358,6 +361,7 @@ export default function CadastroUsuario() {
               name="senha"
               id="senha"
               type="password"
+              required
               placeholder="Ex: 123@Senha"
               title="É necessário que a senha tenha no mínimo 8 caracteres, possuindo ao menos 1 número, 1 caracter especial, 1 letra maiúscula e 1 letra minúscula."
               onChange={(e) => {
@@ -375,6 +379,7 @@ export default function CadastroUsuario() {
               id="confirmarSenha"
               name="confirmarSenha"
               type="password"
+              required
               onChange={(e) => {
                 validaSenha();
                 setControlador((prev) => {
@@ -389,6 +394,7 @@ export default function CadastroUsuario() {
               label="Gênero"
               name="genero"
               id="genero"
+              required
               onChange={(e) => {
                 setControlador((prev) => {
                   return { ...prev, genero: e };
@@ -406,6 +412,7 @@ export default function CadastroUsuario() {
               id="dataNascimento"
               name="dataNascimento"
               type="date"
+              required
               onChange={(e) =>
                 setControlador((prev) => {
                   return { ...prev, dataNascimento: e };
@@ -419,6 +426,7 @@ export default function CadastroUsuario() {
               label="País"
               name="country"
               id="country"
+              required
               onChange={(e) => selectPais(e)}
               value={controlador.country}
               list={listaPaises}
@@ -432,6 +440,7 @@ export default function CadastroUsuario() {
               label="Estado (UF)"
               id="estado"
               name="estado"
+              required
               disabled={!controlador.country}
               onChange={(e) => selectEstado(e)}
               value={controlador.estado}
@@ -446,6 +455,7 @@ export default function CadastroUsuario() {
               label="Cidade"
               id="cidade"
               name="cidade"
+              required
               disabled={!controlador.estado}
               onChange={(e) =>
                 setControlador((prev) => {
@@ -472,6 +482,9 @@ export default function CadastroUsuario() {
               value={controlador.telefone}
             />
           </div>
+        </div>
+        <div style={{fontSize: 14, textAlign: 'left', color: 'red'}}>
+          OBS: Os campos com o símbolo "*" são obrigatórios e devem  ser preenchidos para a realização do cadastro.
         </div>
         <div
           style={{

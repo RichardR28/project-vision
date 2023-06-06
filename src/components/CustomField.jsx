@@ -28,6 +28,7 @@ export default function CustomField(props) {
         }
       >
         {props.label || 'Custom Field'}:
+        {props.required && '*'}
       </div>
       <input
         id={props.id}

@@ -18,6 +18,7 @@ export default function SelectBox(props) {
     title,
     disabled,
     value,
+    required,
   } = props;
   return (
     <div
@@ -28,6 +29,7 @@ export default function SelectBox(props) {
     >
       <div style={{ textAlign: 'start', padding: '5px 0' }}>
         {label || 'Custom Field'}:
+        {required && '*'}
       </div>
       <select
         id={id}
