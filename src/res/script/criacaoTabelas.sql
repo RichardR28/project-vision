@@ -122,8 +122,8 @@ create table jogos (
 );
 -- Jogos Padrões
 -- Game 01
--- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status) 
--- values ('Jogo para Detecção de Daltonismo 01', 'logo_game_01.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Deuteranopia. Para jogar bbasta selecionar dentre os quadrados apresentados aquele que for diferente, ao final será exibido sua pontuação.', '2022-02-22', 1);
+-- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status, codigo) 
+-- values ('Jogo para Detecção de Daltonismo 01', 'logo_game_01.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Deuteranopia. Para jogar bbasta selecionar dentre os quadrados apresentados aquele que for diferente, ao final será exibido sua pontuação.', '2022-02-22', 1, 'game01');
 
 -- Game02
 -- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status, codigo)
