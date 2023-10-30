@@ -18,7 +18,7 @@ export const sarvarQuiz = (
     }
   });
   form.append('perguntas', JSON.stringify(perguntas));
-  fetch(`${host}/quizzes/savarQuiz`, {
+  fetch(`${host}/quizzes/salvarQuiz`, {
     method: 'post',
     body: form,
   })

@@ -85,7 +85,7 @@ export default function About() {
                 alt="perfil"
               />
               <style.PresentationName>Richard Alves Roling</style.PresentationName>
-              <style.PresentationRole>Desenvolvedor Frot-end</style.PresentationRole>
+              <style.PresentationRole>Desenvolvedor Front-end</style.PresentationRole>
               <style.PresentationLinks>
                 <img
                   width={32}
