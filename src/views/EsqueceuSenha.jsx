@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { CustomField } from '../components';
 import { Paper } from '@material-ui/core';
-import { verificaEmail, redefineSenha } from '../actions/UserActions';
+import { verificaEmail, redefineSenha, validaSaltHash } from '../actions/UserActions';
 import { useHistory } from 'react-router-dom';
-
-const crypto = require('crypto');
 
 export default function EsqueceuSenha() {
   const [email, setEmail] = useState('');
@@ -27,11 +25,9 @@ export default function EsqueceuSenha() {
     }
   }
 
-  function validaChave() {
-    let hash = crypto.createHmac('sha512', info.salt);
-    hash.update(codigo);
-    hash = hash.digest('hex');
-    if (hash === info.hash) {
+  async function validaChave() {
+    const isTokenValid = await validaSaltHash(info, codigo);
+    if (isTokenValid?.status === 200) {
       redefineSenha(email, senha, history);
     } else {
       alert('Chave inválida');

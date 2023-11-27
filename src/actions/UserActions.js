@@ -129,3 +129,13 @@ export const alteraSenha = (id, senha, novaSenha, callback = () => {}) => {
       }
     });
 };
+
+export const validaSaltHash = (info, codigo) => {
+  return fetch(`${host}/users/validaSaltHash`, {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ info, codigo }),
+  })
+    .then((res) => res.json())
+    .then((data) => data);
+};
