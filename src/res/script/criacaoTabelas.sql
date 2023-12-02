@@ -123,14 +123,14 @@ create table jogos (
 -- Jogos Padrões
 -- Game 01
 -- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status, codigo) 
--- values ('Jogo para Detecção de Daltonismo 01', 'logo_game_01.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Deuteranopia. Para jogar bbasta selecionar dentre os quadrados apresentados aquele que for diferente, ao final será exibido sua pontuação.', '2022-02-22', 1, 'game01');
+-- values ('Jogo para Detecção de Daltonismo 01', 'logo_game_01.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Deuteranopia. Para jogar basta selecionar dentre os quadrados apresentados aquele que for diferente, ao final será exibido sua pontuação.', '2022-02-22', 1, 'game01');
 
 -- Game02
 -- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status, codigo)
--- values ('Jogo Para Detecção de Daltonismo 02', 'logo_game_02.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Tritanopia. Para jogar basta selecionar dentre os ciculos, todos aqueles que forem da mesma cor ao pote, em seguida clicar em adicionar ao pote ou na imagem do pote, ao final será exibido sua pontuação.', '2022-03-07', 1, 'game02');
+-- values ('Jogo Para Detecção de Daltonismo 02', 'logo_game_02.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Tritanopia. Para jogar basta selecionar dentre os circulos, todos aqueles que forem da mesma cor ao pote, em seguida clicar em adicionar ao pote ou na imagem do pote, ao final será exibido sua pontuação.', '2022-03-07', 1, 'game02');
 
 -- insert into jogos (titulo, imagem, idCriador, descricao, dataCriacao, status, codigo)
--- values ('Jogo Para Detecção de Daltonismo 03', 'logo_game_03.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Protanopia. Para jogar basta selecionar dentre os ciculos, todos aqueles que forem da mesma cor indicada acima, em seguida clicar em confirmar, ao final será exibido sua pontuação.', '2022-03-11', 1, 'game03');
+-- values ('Jogo Para Detecção de Daltonismo 03', 'logo_game_03.png', 3, 'Esse jogo identifica se o usuário possui daltonismo para o tipo Protanopia. Para jogar basta selecionar dentre os circulos, todos aqueles que forem da mesma cor indicada acima, em seguida clicar em confirmar, ao final será exibido sua pontuação.', '2022-03-11', 1, 'game03');
 
 create table pontuacoes (
 	id int auto_increment,
