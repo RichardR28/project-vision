@@ -37,9 +37,14 @@ export default function Game02() {
     if (!gameId) {
       history.push('/listaJogos');
     }
+  }, []);
+
+  useEffect(() => {
     calculation();
     window.addEventListener('resize', calculation());
   }, [gameId, history]);
+
+  
 
   function handleChange(e, value) {
     setActiveTab(value);
